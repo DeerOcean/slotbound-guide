@@ -8,7 +8,7 @@
 .mul{display:block;font-size:11px;font-weight:400;color:var(--muted)}
 .gd{display:inline-block;font-size:11px;font-weight:700;padding:0 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
 .g-B{color:var(--teal);border-color:var(--teal)}
-.g-A{color:var(--gold);border-color:var(--gold)}
+.g-A{color:var(--gold-ink);border-color:var(--gold)}
 .g-S{color:var(--wine);border-color:var(--wine)}
 
 /* 三批建議 */
@@ -39,7 +39,7 @@
 .tg{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:0 6px;margin-left:6px;border:1px solid var(--line);color:var(--muted)}
 .tg.ph{color:var(--teal);border-color:var(--teal);background:var(--teal-soft)}
 .tg.bad{color:var(--wine);border-color:var(--wine);background:var(--wine-soft)}
-.tg.gate{color:var(--gold);border-color:var(--gold)}
+.tg.gate{color:var(--gold-ink);border-color:var(--gold)}
 
 /* 命運石 */
 .obar{display:flex;height:14px;min-width:120px;border-radius:5px;overflow:hidden;background:var(--bg);border:1px solid var(--line)}

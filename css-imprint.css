@@ -12,7 +12,7 @@
 .sig-c small{display:none;font-size:11px;color:var(--muted)}
 .sig-c.off{opacity:.6}
 .sig-h .g-advanced,.sig-c.g-advanced .sig-n{color:var(--teal)}
-.sig-h .g-legendary,.sig-c.g-legendary .sig-n{color:var(--gold)}
+.sig-h .g-legendary,.sig-c.g-legendary .sig-n{color:var(--gold-ink)}
 .sig-h .g-prism,.sig-c.g-prism .sig-n{color:var(--wine)}
 .sig-x{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 .sig-x .sig-c{flex-direction:row;padding:4px 10px;gap:6px}
@@ -63,7 +63,7 @@
 .up-n .cic{width:22px;height:22px;vertical-align:middle;margin-right:6px}
 .band{font-size:12px;font-weight:700;border-radius:4px;padding:0 6px;border:1px solid var(--line);white-space:nowrap}
 .band.b-big{color:var(--teal);border-color:var(--teal);background:var(--teal-soft)}
-.band.b-mid{color:var(--gold);border-color:var(--gold)}
+.band.b-mid{color:var(--gold-ink);border-color:var(--gold)}
 .band.b-small{color:var(--muted)}
 
 /* 5. 圖鑑 */
