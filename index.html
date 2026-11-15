@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slotbound 實用指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1115f">
+</head>
+<body>
+<header class="top">
+  <b>Slotbound 實用指南</b>
+  <nav>
+    <a class="soon" href="#">開局</a>
+    <a class="soon" href="#">轉盤</a>
+    <a class="soon" href="#">養兵</a>
+    <a class="cur" href="#">升階與羈絆</a>
+    <a class="soon" href="#">商店</a>
+    <a class="soon" href="#">Boss</a>
+    <a class="soon" href="#">局外</a>
+  </nav>
+  <div class="search">
+    <input id="q" type="search" placeholder="搜職業或羈絆，例如 聖騎士" autocomplete="off">
+    <div class="res" id="qres"></div>
+  </div>
+</header>
+
+<main>
+  <h1>升階與羈絆規劃器</h1>
+  <p class="lead">點職業加進隊伍，右邊算出湊到哪些羈絆。滑鼠移到職業上（手機點一下）看升階路線和同羈絆的人。</p>
+  <div class="tip-box" id="tips"></div>
+
+  <div class="planner">
+    <section class="panel">
+      <div class="syms" id="syms"></div>
+      <div class="filters"><span class="flabel">看某個羈絆有誰：</span><span id="filters"></span></div>
+      <div id="tree"></div>
+    </section>
+    <aside class="side">
+      <section class="panel">
+        <h2>我的隊伍 <span id="teamCount"></span></h2>
+        <div class="team" id="team"></div>
+        <div class="btns">
+          <button class="btn" id="clear">清空</button>
+          <button class="btn" id="share">複製分享連結</button>
+        </div>
+        <div class="code">
+          <input id="codeIn" placeholder="貼上隊伍代碼或分享連結" aria-label="貼上隊伍代碼或分享連結" autocomplete="off">
+          <button class="btn" id="codeGo">載入</button>
+        </div>
+        <p class="codemsg" id="codeMsg" hidden></p>
+      </section>
+      <section class="panel">
+        <h2>湊到的羈絆</h2>
+        <div id="fxlist"></div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<div class="pop" id="pop"></div>
+
+<script src="data/factions.js?v=1115f"></script>
+<script src="data/tree.js?v=1115f"></script>
+<script src="app.js?v=1115f"></script>
+</body>
+</html>
