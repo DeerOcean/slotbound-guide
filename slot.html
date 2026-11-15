@@ -6,19 +6,20 @@
 <title>Slotbound 實用指南</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1115h">
+<link rel="stylesheet" href="style.css?v=1115i">
 </head>
 <body>
 <header class="top">
   <b>Slotbound 實用指南</b>
   <nav>
-    <a class="soon" href="#">開局</a>
+    <a href="open.html">開局</a>
     <a class="cur" href="slot.html">轉盤</a>
-    <a class="soon" href="#">養兵</a>
+    <a href="units.html">養兵</a>
+    <a href="imprint.html">刻印</a>
     <a href="index.html">升階與羈絆</a>
-    <a class="soon" href="#">商店</a>
-    <a class="soon" href="#">Boss</a>
-    <a class="soon" href="#">局外</a>
+    <a href="shop.html">商店</a>
+    <a href="boss.html">Boss</a>
+    <a href="meta.html">局外</a>
   </nav>
   <div class="search">
     <input id="q" type="search" placeholder="搜這頁或核心，例如 微調" autocomplete="off">
@@ -35,14 +36,14 @@
 
   <section class="sec" id="spins" data-t="這波轉幾次 價格 金幣 收入">
     <h2><span class="no">1</span>這波轉幾次</h2>
-    <p class="adv">每波先轉最便宜的第 1 轉（100 金）。第 4 轉以後一轉 250 金起跳，很少划算。</p>
-    <p>價格每波重算：從 100 開始，每轉一次 +50，一波最多 6 轉。起手 450 金剛好轉 3 次；之後打贏一波只拿約 100～130 金，所以多數時候一波只轉得起 1 次，存幾波才多轉 1 次。</p>
+    <p class="adv">每波轉滿前 3 轉（共 450 金），一波的收入剛好夠。第 4 轉 250 金起跳，剩的錢存兩三波才轉得起。</p>
+    <p>價格每波重算：從 100 開始，每轉一次 +50，一波最多 6 轉。起手 450 金剛好轉 3 次；之後每波結束固定拿 400 金，打贏再加 100～130，一波約 520 金，所以每波大約也是 3 轉、剩 70 左右。錢留到下一波不會吃虧，下一波還是從 100 開始買。</p>
     <div class="calc panel">
       <div class="calc-in">
         <label for="gold">我現在有</label>
         <input id="gold" type="number" inputmode="numeric" min="0" step="10" value="450">
         <span>金</span>
-        <span class="quick"><button class="btn" data-g="450">開局 450</button><button class="btn" data-g="120">打贏一波 120</button><button class="btn" data-g="300">300</button></span>
+        <span class="quick"><button class="btn" data-g="450">開局 450</button><button class="btn" data-g="520">打贏一波 520</button><button class="btn" data-g="700">存了一波 700</button></span>
       </div>
       <div class="ladder" id="ladder"></div>
       <p class="calc-out" id="calcOut"></p>
@@ -50,7 +51,8 @@
     <details>
       <summary>收入怎麼算、每個兵花多少錢</summary>
       <ul>
-        <li>打贏：基本 100，20 秒內打完最多再 +20，少死人最多再 +10。打輸：+10。</li>
+        <li>每波結束固定 +400。打贏再加：基本 100，20 秒內打完最多 +20，少死人最多 +10；打輸只加 10。<span class="infer">推論</span>程式裡 +400 沒有分輸贏，但沒實測打輸的那波。</li>
+        <li>實際 10 局的紀錄：打贏的波每波入帳 500～572 金，中位數 523。</li>
         <li>沒中不退錢。</li>
         <li>一轉平均召喚 0.25 個兵（純機率）。所以第 1 轉約 400 金換一個兵，第 6 轉約 1,380 金換一個兵。<span class="infer">推論</span>這是不算保底和核心的算法，實際會好一點。</li>
         <li>局外升級和核心可以降價：例如「金牙」每波第一次中獎後下一轉免費、「倒轉時鐘」沒中後下一轉 −25。</li>
@@ -133,7 +135,7 @@
       </table>
       <ul>
         <li>第 2、3 波的保護每波最多用一次，而且只在這局的兵還很少時才幫（第 2 波最多 1 個、第 3 波最多 2 個）。<span class="infer">推論</span>判斷方式寫在遊戲本體裡，看不到細節。</li>
-        <li>第 1 波有一次保證中獎（程式裡跟教學寫在一起，一般局有沒有沒確認）。</li>
+        <li>第 1 波前 3 轉內保證中一次，一般局也有（實際 10 局紀錄都符合）。</li>
         <li>第 4 波起，連續 3 波一次都沒中，下一波會強制中一次。<span class="infer">推論</span></li>
         <li>核心觸發的重轉、免費轉不算進連輸。</li>
       </ul>
@@ -142,7 +144,7 @@
 
   <section class="sec" id="cores" data-t="核心 什麼時候 挑哪個 稀有度">
     <h2><span class="no">5</span>核心：什麼時候來、挑哪個</h2>
-    <p class="adv">前期優先挑省錢和沒中補救的核心，例如「金牙」「扭曲之鈴」「倒轉時鐘」。<span class="infer">推論</span>錢最緊的地方是轉盤，一轉省下的錢比多一點屬性有用。</p>
+    <p class="adv">前期優先挑省錢和沒中補救的核心，例如「金牙」「扭曲之鈴」「倒轉時鐘」（金牙要先通關第 1 張圖簡單、在局外解鎖才抽得到）。<span class="infer">推論</span>錢最緊的地方是轉盤，一轉省下的錢比多一點屬性有用。</p>
     <p>轉滿一定次數就給你 3 選 1：第 5 轉拿第 1 個，之後隔 10、10、15、15、15、20、20 轉，再來每 25 轉。最多帶 8 個，可以花精髓重抽選項。越後面拿的核心，越容易出稀有和傳說。</p>
     <details>
       <summary>第幾個核心出哪種稀有度（%）</summary>
@@ -173,7 +175,7 @@
   <p class="src-note">資料來源：遊戲程式（反編譯）和遊戲內繁中文字。標「推論」的是我們從數字推出來的，不是遊戲寫明的。</p>
 </main>
 
-<script src="data/cores.js?v=1115h"></script>
-<script src="slot.js?v=1115h"></script>
+<script src="data/cores.js?v=1115i"></script>
+<script src="slot.js?v=1115i"></script>
 </body>
 </html>

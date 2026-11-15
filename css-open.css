@@ -1,0 +1,12 @@
+/* 開局頁新增樣式：只用 style.css 的色票變數 */
+.lockedlist{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.lockedlist .ctag small{margin-left:4px;font-size:11px;color:var(--muted)}
+.calc-in select{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 8px;max-width:100%}
+.calc-in select:focus{outline:2px solid var(--gold);outline-offset:1px}
+.tierhd{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.core .why{font-size:12px;color:var(--muted);margin-top:4px}
+.core.t1{border-left:3px solid var(--teal);padding-left:10px}
+.core.t3{opacity:.8}
+.core.hl{background:var(--gold-soft)}
+.panel .mini td:last-child{white-space:nowrap}
+@media (max-width:520px){.panel .mini td:last-child{white-space:normal}}

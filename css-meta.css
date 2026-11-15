@@ -1,0 +1,73 @@
+/* 局外頁新增樣式：只用 style.css 的色票變數 */
+.calc-in select{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 8px;max-width:100%}
+.calc-in select:focus{outline:2px solid var(--gold);outline-offset:1px}
+.mini td.hi{color:var(--teal)}
+.mini td.hi b{color:var(--teal)}
+.inc td b{display:block;font-size:15px}
+.inc td small{display:block;font-size:11px;color:var(--muted)}
+.mul{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+.gd{display:inline-block;font-size:11px;font-weight:700;padding:0 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.g-B{color:var(--teal);border-color:var(--teal)}
+.g-A{color:var(--gold);border-color:var(--gold)}
+.g-S{color:var(--wine);border-color:var(--wine)}
+
+/* 三批建議 */
+.phases{display:flex;flex-direction:column;gap:12px;margin:12px 0}
+.phase h3{font-size:15px;margin:0 0 6px}
+.phase h3 small{font-weight:400;font-size:12px;color:var(--muted);margin-left:8px}
+.prow{display:grid;grid-template-columns:minmax(0,150px) 40px minmax(0,1fr);gap:8px;align-items:baseline;padding:4px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.prow:last-child{border-bottom:0}
+.prow a{color:var(--teal);text-decoration:none;border-bottom:1px dotted var(--teal)}
+.prow .pc{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.prow .pw{color:var(--muted);font-size:13px}
+.phase > .prow:only-child,.phase .prow > b:first-child:not(:last-child){}
+#stoneTip .prow{grid-template-columns:48px minmax(0,1fr)}
+
+/* 升級清單 */
+.ufilter,.qfilter{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 10px}
+.ufilter > span,.qfilter > span{display:contents}
+.ufilter .chk{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--muted);cursor:pointer;margin-left:8px}
+.ulist{display:flex;flex-direction:column;margin-bottom:10px}
+.urow{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:10px;padding:8px 6px;border-bottom:1px dashed var(--line);border-radius:8px}
+.urow.hl,.qrow.hl,tr.hl{background:var(--gold-soft);box-shadow:0 0 0 2px var(--gold)}
+.ut b{font-size:14px}
+.ue{font-size:13px;margin-top:2px}
+.us{font-size:12px;color:var(--muted);margin-top:2px}
+.up{text-align:right;font-variant-numeric:tabular-nums}
+.up b{display:block;font-size:15px}
+.up small{font-size:11px;color:var(--muted)}
+.tg{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:0 6px;margin-left:6px;border:1px solid var(--line);color:var(--muted)}
+.tg.ph{color:var(--teal);border-color:var(--teal);background:var(--teal-soft)}
+.tg.bad{color:var(--wine);border-color:var(--wine);background:var(--wine-soft)}
+.tg.gate{color:var(--gold);border-color:var(--gold)}
+
+/* 命運石 */
+.obar{display:flex;height:14px;min-width:120px;border-radius:5px;overflow:hidden;background:var(--bg);border:1px solid var(--line)}
+.obar i{display:block;height:100%}
+.og-normal{background:var(--line)}
+.og-advanced{background:var(--teal)}
+.og-rare{background:#5b7fc4}
+.og-legendary{background:var(--gold)}
+.og-prism{background:var(--wine)}
+.olegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin:2px 0 8px}
+.olegend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.stn td{vertical-align:top}
+
+/* 任務 */
+.qlist{display:flex;flex-direction:column}
+.qrow{display:grid;grid-template-columns:28px 120px minmax(0,1fr);gap:8px;align-items:baseline;padding:5px 4px;border-bottom:1px dashed var(--line);border-radius:6px;font-size:14px}
+.qrow:last-child{border-bottom:0}
+.qrow .qd{color:var(--muted);font-size:13px}
+.qrow .qd small{display:block;font-size:12px}
+
+@media (max-width:520px){
+  .prow{grid-template-columns:minmax(0,1fr) 36px}
+  .prow .pw{grid-column:1 / -1}
+  #stoneTip .prow{grid-template-columns:1fr}
+  .qrow{grid-template-columns:24px minmax(0,1fr)}
+  .qrow .qd{grid-column:2}
+  .urow{grid-template-columns:minmax(0,1fr) 56px}
+}
+@media (prefers-color-scheme: dark){
+  .og-rare{background:#7d9de0}
+}

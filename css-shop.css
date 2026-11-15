@@ -1,0 +1,53 @@
+/* 商店頁新增樣式：只用 style.css 的色票變數 */
+.calc-in select{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 8px;max-width:100%}
+.calc-in select:focus{outline:2px solid var(--gold);outline-offset:1px}
+.calc-in .chk{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--muted);cursor:pointer}
+.calc-in .chk input{width:auto;padding:0}
+.mini a.il{color:var(--teal);cursor:pointer;text-decoration:none;border-bottom:1px dotted var(--teal)}
+
+/* 前期推薦 */
+.earlybox{display:flex;flex-direction:column}
+.erow{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;align-items:start;padding:8px 0;border-bottom:1px dashed var(--line)}
+.erow:last-child{border-bottom:0}
+.erow img{width:32px;height:32px;image-rendering:pixelated}
+.erow .eh{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.erow .eh button{border:0;background:none;padding:0;font:inherit;font-size:14px;font-weight:700;color:var(--teal);cursor:pointer;border-bottom:1px dotted var(--teal)}
+.erow .ep{font-size:12px;color:var(--muted)}
+.erow p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.erow .no{font-size:12px;font-weight:700;color:var(--gold)}
+
+/* 後期卡片 */
+.lcard{padding:8px 0;border-bottom:1px dashed var(--line)}
+.lcard:last-child{border-bottom:0}
+.lcard h3{margin:0 0 2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.lcard h3 button{border:0;background:none;padding:0;font:inherit;font-size:15px;font-weight:700;color:var(--teal);cursor:pointer;border-bottom:1px dotted var(--teal)}
+.lcard p{margin:0;font-size:14px;color:var(--muted)}
+.lcard p b{color:var(--ink)}
+
+/* 道具清單 */
+.ilist{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+.item .chd .tz,.item .chd .fz,.item .chd .uz{font-size:11px;font-weight:700;border-radius:4px;padding:0 6px;border:1px solid var(--line);color:var(--muted)}
+.item .chd .fz.u{color:var(--teal);border-color:var(--teal)}
+.item .chd .fz.c{color:var(--gold);border-color:var(--gold)}
+.item .chd .uz{color:var(--wine);border-color:var(--wine);background:var(--wine-soft)}
+.item .ipr{font-size:12px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.item .ipr b{color:var(--ink)}
+.item .ifw{font-size:12px;color:var(--muted);margin-top:2px}
+.item details{margin:6px 0 0;padding:0 10px}
+.item summary{font-size:12px;padding:4px 0}
+.item details[open] summary{margin-bottom:4px}
+.item details ul{margin:0 0 6px;padding-left:16px;font-size:12px;color:var(--muted)}
+.item details li{margin:2px 0}
+.item details li em{font-style:normal;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-soft);border-radius:4px;padding:0 5px;margin-left:4px}
+
+.sword ul{margin:0;padding-left:20px}
+.sword li{margin:3px 0;font-size:14px}
+
+@media (max-width:820px){
+  .ilist{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .calc-in input[type=number]{width:72px}
+  .ladder#eLadder{grid-template-columns:repeat(3,1fr)}
+  .mini{font-size:12px}
+}

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>局外：源石怎麼賺、怎麼花 - Slotbound 實用指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1115i">
+<link rel="stylesheet" href="css-meta.css?v=1115i">
+</head>
+<body>
+<header class="top">
+  <b>Slotbound 實用指南</b>
+  <nav>
+    <a href="open.html">開局</a>
+    <a href="slot.html">轉盤</a>
+    <a href="units.html">養兵</a>
+    <a href="imprint.html">刻印</a>
+    <a href="index.html">升階與羈絆</a>
+    <a href="shop.html">商店</a>
+    <a href="boss.html">Boss</a>
+    <a class="cur" href="meta.html">局外</a>
+  </nav>
+  <div class="search">
+    <input id="q" type="search" placeholder="搜這頁，例如 金牙、聖域石" autocomplete="off">
+    <div class="res" id="qres"></div>
+  </div>
+</header>
+
+<main class="guide">
+  <h1>局外：源石該怎麼賺、怎麼花</h1>
+  <p class="lead">源石是局外貨幣：打贏關卡的「關口」（每 5 波一個）就給，拿去買永久升級和命運石。這頁照順序回答：哪張圖最好刷、升級先買哪些、命運石值不值、任務和解鎖怎麼跑。</p>
+  <nav class="toc">
+    <a href="#farm">哪張圖最好刷</a><a href="#buy">升級先買什麼</a><a href="#stone">命運石</a><a href="#quest">任務與解鎖</a>
+  </nav>
+
+  <section class="sec" id="farm" data-t="哪張圖最好刷 源石 收益 地圖 難度 倍率 無盡 首次通關 加倍 開闊森林 深邃洞窟 荒原 失落遺蹟 猩紅地獄 冰冷宇宙">
+    <h2><span class="no">1</span>哪張圖最好刷</h2>
+    <p class="adv">刷源石就去「你打得贏的最難那張圖、最難那個難度」，而且打到底。每波收益是越後面越多，打一半就退很虧。</p>
+    <p>每打贏一個關口（第 5、10、15… 波）給「關口數 × 地圖倍率 × 難度倍率」。簡單打到第 10 波、普通 20 波、困難 30 波。地圖倍率是 1、2、4、6、9、13，難度倍率是 1、2、3，所以最後一張圖的困難，一局的收益是第一張圖簡單的 273 倍。<span class="infer">推論</span>遊戲沒寫「哪裡最好刷」，這是把公式算出來的結論。</p>
+    <div class="calc panel">
+      <div class="calc-in">
+        <label for="mapSel">我刷</label>
+        <select id="mapSel"></select>
+        <select id="diffSel"></select>
+        <label for="goal">想存</label>
+        <input id="goal" type="number" inputmode="numeric" min="0" step="50" value="1000">
+        <span>源石</span>
+      </div>
+      <p class="calc-out" id="farmOut"></p>
+    </div>
+    <div class="tblwrap"><table class="mini inc" id="incTbl"></table></div>
+    <p class="note">每格上面的大字是「重複刷」一局拿的，下面小字是「第一次打到」那局拿的。</p>
+    <details>
+      <summary>第一次通關加倍、算法和各個提醒</summary>
+      <ul>
+        <li>每個「地圖＋難度＋第幾個關口」第一次打贏會多給一份同樣的（等於雙倍），而且記在存檔裡、不會再給。所以每種組合只有第一次是雙倍，之後都是單倍。</li>
+        <li>18 種組合全部第一次打通，一共 <b id="firstAll"></b> 源石；局外升級全買（不含兩個買不到的）要 <b id="costAll"></b>。所以光靠第一次不夠，之後要靠重複刷補。</li>
+        <li>每波平均：同一張圖，困難大約是普通的 2.1 倍、簡單的 7 倍。<span class="infer">推論</span>遊戲裡沒有寫一局要打幾分鐘，所以「每分鐘」的收益沒法算，只能比每波。</li>
+        <li>失敗時已拿到的關口源石有沒有保留，我沒確認。</li>
+        <li>無盡模式裡有一種敵人特性（王族）能讓關口源石多 25%；它什麼時候出現沒確認，一般戰役沒看到類似的加成。</li>
+      </ul>
+    </details>
+    <details>
+      <summary>無盡模式：前 30 波跟困難一樣，之後源石很少</summary>
+      <ul>
+        <li>第 1～30 波：關口收益跟「那張圖的困難模式」一樣算（難度倍率固定 3），但<b>沒有第一次加倍</b>。</li>
+        <li>第 31 波起：每個關口固定只給 <b>20</b> 源石，不看地圖。第 31 波起戰鬥也會開始計入加時。</li>
+        <li>第 40 波是第一個「門」波，第 41 波起算進入深處。<span class="infer">推論</span>這幾個波數是分開的三件事：30（改用循環波表）、40（門波）、41（深處），不是同一個「開始」。</li>
+        <li>所以無盡拿來刷源石不划算：第 31 波以後一個關口 20，困難最後一張圖在第 30 波的一個關口就有 234。</li>
+        <li>無盡的命運石貨架價格比一般貴（見下一節）。</li>
+      </ul>
+    </details>
+    <details>
+      <summary>地圖倍率有 6 個還是 8 個</summary>
+      <ul>
+        <li>遊戲只有 6 張圖，倍率表是 1、2、4、6、9、13。程式裡另外還留了第 7、8 格（18、24），但沒有第 7、8 張圖，永遠用不到。</li>
+        <li>所以上面表格只有 6 列。如果你在別處看到「倍率 8」，那是把這兩格備用的也算進去了。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="buy" data-t="升級先買什麼 局外升級 源石 價格 推薦 先買 補給 兵種 稀有度 核心 爆破 商店 命運石 區域 通關">
+    <h2><span class="no">2</span>局外升級：先買什麼</h2>
+    <p class="adv">先買「便宜又整局都吃得到」的：開局金幣、生命、部署上限、高階單位機率、核心重抽。這些加起來大約只要 <b id="firstCost"></b> 源石。</p>
+    <p>升級每個只能買一次，要先買它的上一個，部分還要先通關某張圖。下面三批是照「花多少、每一局都用得到嗎」排的建議，順序是我們的判斷，遊戲沒有標先後。<span class="infer">推論</span></p>
+    <div class="phases" id="phases"></div>
+    <details open>
+      <summary>全部升級清單（<span id="upN"></span> 個，可篩選）</summary>
+      <div class="ufilter">
+        <span id="ufCat"></span>
+        <label class="chk"><input type="checkbox" id="ufNow"> 只看現在不用通關就能買的</label>
+      </div>
+      <div class="ulist" id="ulist"></div>
+    </details>
+    <details>
+      <summary>哪些買不到、區域門檻</summary>
+      <ul>
+        <li>「專精物品研究 I」和「商品鎖定」在遊戲裡永遠買不到（程式固定回傳不能買），兩個都別等。</li>
+        <li>核心 UP、物品欄擴充、命運石貨架、成長分支、應急精華這幾個有「區域門檻」：要先把那個區域的幾個節點買齊才能買。清單裡有標出來。</li>
+        <li>「要先通關」是整條路徑上最難的那一個：例如核心 UP 的路上有要通關第 4 張圖（普通難度）的節點。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="stone" data-t="命運石 解鎖 貨架 稀有度 機率 起源石 微風石 雙子石 占卜石 里程石 裂隙石 特殊石 熟練石 祝福石 勝負石 星群石 聖域石 巔峰石 日蝕石 銀河石 稜彩">
+    <h2><span class="no">3</span>命運石：什麼時候值得</h2>
+    <p class="adv">命運石是一張「這一轉的兵換一套稀有度機率」的卡。單抽就選聖域石這類「保底稀有」的；想要多個兵就選星群石。先解鎖命運石本身（約 325 源石起，要先通關第 4 張圖簡單）。</p>
+    <p>每局最多有 C、B、A 三張卡，各配一個同等級的任務，完成任務才能用。卡的用法是：用這張卡轉一次，這一轉的兵不再看你升級得來的普通機率，改看石頭自己的稀有度機率。你升級全買滿的一般轉盤是：普通 80%、高階 15%、稀有 4.5%、傳說 0.4%、稜彩 0.1%，拿來對照下表。</p>
+    <div class="phases" id="stoneTip"></div>
+    <div class="tblwrap"><table class="mini stn" id="stoneTbl"></table></div>
+    <p class="note">「期待稀有以上」＝這張卡轉出的兵裡，平均有幾個是稀有、傳說或稜彩。對照：普通轉盤一個兵只有約 5%。</p>
+    <details>
+      <summary>貨架：用源石在開局買卡</summary>
+      <ul>
+        <li>解鎖「命運石貨架」後，開局可以花源石直接買卡，不用等任務。價格看難度：</li>
+      </ul>
+      <div class="tblwrap"><table class="mini" id="standTbl"></table></div>
+      <ul>
+        <li>貨架只賣 C、B、A 三級裡「一次轉一個兵、沒有特殊玩法」的石頭，所以雙子石、星群石、占卜石、熟練石、特殊石都買不到，只能靠任務拿。S 級石頭也不在貨架上。</li>
+        <li>S 級石頭只在無盡模式出現：配 A 級任務時有一半機率換成 S 級卡。<span class="infer">推論</span>程式的判斷是「無盡模式且 S 級石頭已有可用的」，一般局沒看到出現。</li>
+        <li>沒買「稜彩解鎖」之前，所有石頭轉出稜彩的機率會自動併進傳說，不會浪費。</li>
+        <li>特殊石有額外的特殊效果（程式裡有一個 0.15 的設定），具體做什麼沒確認，文字說明也是空的。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="quest" data-t="任務 解鎖 命運石任務 通關 前置 區域門檻 重抽 C級 B級 A級 S級 難度">
+    <h2><span class="no">4</span>任務與解鎖</h2>
+    <p class="adv">任務不用刻意挑：每張卡抽到的任務，打這局時順手完成就好；抽到太難的就用「任務重抽」。</p>
+    <p>命運石任務分 C、B、A、S 四級，難度跟卡同級。共 <b id="qN"></b> 個，大多是「某個波數內中獎幾次」「某種兵出幾個」這類跟轉盤有關的目標。爆破老虎機有些任務會用另一套說法。</p>
+    <div class="qfilter"><span id="qfG"></span></div>
+    <div class="qlist panel" id="qlist"></div>
+    <details>
+      <summary>局外升級怎麼解鎖：通關和區域</summary>
+      <ul>
+        <li>每個升級有三種門：①先買上一個；②先通關某張圖的某個難度；③部分升級要先把整個區域買齊。</li>
+        <li>額外生命、初始補給、指揮上限這幾個完全不用通關，第一局打完就能買；高階單位、核心重抽、金牙這幾個要先通關第 1 張圖簡單。</li>
+        <li>稀有研究要先通關第 3 張圖簡單；傳說研究要第 4 張圖簡單；稜彩研究要第 5 張圖簡單；命運石要第 4 張圖簡單。</li>
+        <li>爆破老虎機和它的專屬核心要先通關第 2 張圖普通；最貴的「爆爆莓」要通關第 4 張圖普通。</li>
+        <li>更精確的每個升級的門檻，看上面「全部升級清單」每列的「要先通關」。</li>
+      </ul>
+    </details>
+  </section>
+
+  <p class="src-note">資料來源：遊戲程式（反編譯）和遊戲內繁中文字。標「推論」的是我們從數字推出來的，不是遊戲寫明的。收益用程式公式算出，沒有實際打過驗證。</p>
+</main>
+
+<script src="data/meta_data.js?v=1115i"></script>
+<script src="meta.js?v=1115i"></script>
+</body>
+</html>

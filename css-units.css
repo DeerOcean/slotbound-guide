@@ -1,0 +1,28 @@
+/* 養兵頁專用樣式：只用 style.css 的色彩變數 */
+.ugrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:6px 0 12px}
+.f{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted)}
+.f select,.f input,.imp select{font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 10px;width:100%;min-width:0}
+.f input{font-variant-numeric:tabular-nums}
+.f select:focus,.f input:focus,.imp select:focus{outline:2px solid var(--gold);outline-offset:1px}
+.calc h3{margin:12px 0 4px;color:var(--ink)}
+.calc h3:first-child{margin-top:0}
+.f2{margin:2px 0 4px}
+.imps{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-bottom:10px}
+.imp{display:grid;grid-template-columns:auto 1fr 78px;gap:6px;align-items:center}
+.chk{display:flex;align-items:flex-start;gap:8px;font-size:14px;margin:4px 0 8px;cursor:pointer}
+.chk input{margin-top:5px;flex:none}
+.calc .quick{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:12px 0 8px}
+.calc-out{font-size:18px;margin:8px 0 2px}
+.calc-sub{font-size:14px;color:var(--muted);margin:0}
+.tips{margin:0 0 10px;padding-left:20px;max-width:44em;font-size:14px}
+.tips li{margin:5px 0}
+.mini tr.hi td{background:var(--teal-soft)}
+.mini td small{display:block;font-size:11px;color:var(--muted)}
+.sigtbl td,.sigtbl th{white-space:nowrap}
+.tlist{grid-template-columns:1fr}
+.core .oddsx{color:var(--ink);opacity:.8}
+@media (max-width:520px){
+  .ugrid{grid-template-columns:1fr 1fr}
+  .imps{grid-template-columns:1fr}
+  .mini th,.mini td{padding:4px 8px}
+}

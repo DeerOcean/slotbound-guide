@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slotbound 實用指南：Boss</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1115i">
+<link rel="stylesheet" href="css-boss.css?v=1115i">
+</head>
+<body>
+<header class="top">
+  <b>Slotbound 實用指南</b>
+  <nav>
+    <a href="open.html">開局</a>
+    <a href="slot.html">轉盤</a>
+    <a href="units.html">養兵</a>
+    <a href="imprint.html">刻印</a>
+    <a href="index.html">升階與羈絆</a>
+    <a href="shop.html">商店</a>
+    <a class="cur" href="boss.html">Boss</a>
+    <a href="meta.html">局外</a>
+  </nav>
+  <div class="search">
+    <input id="q" type="search" placeholder="搜這頁，例如 百眼王、石化" autocomplete="off">
+    <div class="res" id="qres"></div>
+  </div>
+</header>
+
+<main class="guide">
+  <h1>Boss：每張地圖會遇到什麼、Boss 怎麼打</h1>
+  <p class="lead">這頁照打仗時會問的順序排：哪幾波漏一隻就輸、六張地圖各有哪些 Boss、每個 Boss 怎麼打、哪幾波最難、無盡模式的規則。敵人和 Boss 的數字都是從遊戲程式抽出來的；「怎麼打」是我們從招式文字推的，一律標「推論」。</p>
+  <nav class="toc">
+    <a href="#sudden">哪幾波不能漏</a><a href="#maps">六張地圖</a><a href="#bosses">18 個 Boss</a><a href="#curve">波次難度</a><a href="#endless">無盡模式</a><a href="#unsure">還沒確認</a>
+  </nav>
+
+  <section class="sec" id="sudden" data-t="猝死 審判 一擊 基地 血量 漏怪 突破 新手護盾 逆轉拉桿 關口恢復 5 10 15 20 25 30">
+    <h2><span class="no">1</span>哪幾波不能漏</h2>
+    <p class="adv">第 5、10、15、20、25、30 波（5 的倍數）一隻都不能漏：只要有一隻敵人走到左邊的基地，整局直接結束。</p>
+    <p>平常的波，敵人走到左邊會扣基地血，基地一開始只有 5 點，扣完才輸，而且傷害要等這一波結束才結算。5 的倍數那幾波不一樣：10 的倍數是 Boss 波，其餘 5 的倍數是遊戲裡叫「審判」的波，兩種都是只要突破一次就輸。</p>
+    <div class="cmp">
+      <div>
+        <h3>一般波</h3>
+        <p>漏 1 隻扣 1 點基地血。</p>
+        <ul><li>基地起始 5 點，局外升級可加。</li><li>扣的血先記著，波末才結算。</li></ul>
+      </div>
+      <div class="hot">
+        <h3>5 的倍數波（Boss／審判）</h3>
+        <p>漏 1 隻就輸整局。</p>
+        <ul><li>打贏之後，有買「關口恢復」才會回 1 點基地血。</li><li>不是只看 Boss：同波的小怪漏了也算（標了「不傷基地」的除外，例如幽狼獸人叫出來的狼）。</li></ul>
+      </div>
+    </div>
+    <details>
+      <summary>三個局外升級可以緩衝（預設都沒有）</summary>
+      <ul>
+        <li><b>新手護盾</b>：第 1～4 波，擋掉第一次生命損失。只對一般波有用，5 的倍數波用不到。</li>
+        <li><b>逆轉拉桿</b>：失去生命後，保證下一次轉動中獎，每局 1 次。同樣只在一般波觸發。</li>
+        <li><b>關口恢復</b>：通關審判或 Boss 波後恢復 1 點基地血，最高到 5 加局外加成。</li>
+        <li>這三個都要在「局外」頁買到頂才生效（<code>ui/upgrade.lua:8609-8629</code> 的 maxed 判斷）。<span class="infer">推論</span>如果你還沒買，就當它們不存在。</li>
+      </ul>
+    </details>
+    <details>
+      <summary>為什麼這樣判斷（出處）</summary>
+      <ul>
+        <li>猝死波＝波數除 10 餘 0 或 5（<code>battlefield.lua:29334</code>）；突破一次直接把基地血設 0（<code>battlefield.lua:56670</code> 的 else 分支）。</li>
+        <li>一般波的基地傷害先放進緩衝，波末才結算（<code>battlefield.lua:56666</code>）。</li>
+        <li>早期護盾、逆轉拉桿只在「不是猝死波」時才判斷（<code>battlefield.lua:56649-56663</code>）；關口恢復在波結束時判斷（<code>battlefield.lua:30675</code>）。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="maps" data-t="六張地圖 關卡 難度 開闊森林 深邃洞窟 荒原 失落遺蹟 猩紅地獄 冰冷宇宙 主題 敵人 地形 雙線 沼澤">
+    <h2><span class="no">2</span>六張地圖各有什麼</h2>
+    <p class="adv">先看自己打到哪張圖、哪個難度：難度 1 只打 10 波，難度 2 打 20 波，難度 3 打 30 波，Boss 固定在第 10、20、30 波。</p>
+    <p>同一張圖的第 10 波，三個難度是同一個 Boss；難度 2 加打到第 20 波，難度 3 再加到第 30 波，各多一個更強的 Boss。每張地圖有自己的敵人，下面的小圖是這張圖第 1～30 波裡出現最多次的幾種。</p>
+    <div class="maps" id="mapGrid"></div>
+    <details>
+      <summary>每張圖的特別規則（地形、兩條路）</summary>
+      <ul id="mapSpecial"></ul>
+    </details>
+    <details id="skDet">
+      <summary>各關有特別招式的小怪（不含 Boss）</summary>
+      <div class="tblwrap" id="skBody"></div>
+    </details>
+  </section>
+
+  <section class="sec" id="bosses" data-t="Boss 首領 招式 血量 攻擊 對策 怎麼打 18 個">
+    <h2><span class="no">3</span>18 個 Boss 怎麼打</h2>
+    <p class="adv">先看三件事：它的血夠不夠低可以速殺、它的招式打誰、你的兵有沒有對得上的。每一條對策都標了依據，可以自己判斷要不要採用。</p>
+    <p>血量、攻擊、速度、射程是遊戲裡的數字；招式原文在「遊戲怎麼寫」裡展開。射程 80 以上算遠程，這是遊戲自己用來區分近戰和遠程的線。</p>
+    <div class="bfilter" id="bFilter"></div>
+    <div class="blist" id="bList"></div>
+  </section>
+
+  <section class="sec" id="curve" data-t="波次 難度曲線 總血量 第幾波最難 審判 每波敵人 組合 變體">
+    <h2><span class="no">4</span>哪幾波最難</h2>
+    <p class="adv">難度 3 的第 3、4、5 張圖，血量最多的是第 20 波的 Boss，不是第 30 波；第 1、2、6 張圖才是最後一波最高。</p>
+    <p>柱子是那一波「所有敵人血量加起來」的期望值，Boss 波是紅色、審判波是金色。這只比血量，沒算招式有多難纏。點柱子看這一波有哪些敵人；有些波有幾種隨機組合，會列出每種的出現機率。</p>
+    <div class="cctl">
+      <span class="g" id="cStage"></span>
+      <span class="g" id="cDiff"></span>
+    </div>
+    <div class="curve">
+      <div class="cbars" id="cBars"></div>
+      <div class="cnum" id="cNum"></div>
+      <div class="cleg"><span><i style="background:var(--teal)"></i>一般波</span><span><i style="background:var(--gold)"></i>審判波（5 結尾）</span><span><i style="background:var(--wine)"></i>Boss 波（10 的倍數）</span></div>
+    </div>
+    <div class="cdet" id="cDet"></div>
+    <p class="note" id="cNote"></p>
+  </section>
+
+  <section class="sec" id="endless" data-t="無盡模式 解鎖 倍率 軍勢 菁英 門 深淵守門人 激戰 獎牌 狂暴 第 31 波">
+    <h2><span class="no">5</span>無盡模式的規則</h2>
+    <p class="adv">無盡模式的前 30 波跟一般模式一樣，從第 31 波起敵人每波都比前一波強，一波打太久還會進入「激戰」，越拖越兇。</p>
+    <p>解鎖條件：簡單難度通關冰冷宇宙（第 6 張圖）。進去後選一張圖打，敵人用那張圖「難度 3」的波表。下面按你會遇到的順序寫。</p>
+    <div id="endRules"></div>
+  </section>
+
+  <section class="sec" id="unsure" data-t="沒確認 不確定 未驗證 推論">
+    <h2><span class="no">6</span>還沒確認的</h2>
+    <details open>
+      <summary>這頁哪些沒有實際進遊戲核對</summary>
+      <ul id="unsureList"></ul>
+    </details>
+  </section>
+
+  <p class="src-note">資料來源：遊戲程式（反編譯，<code>battlefield.lua</code> 的敵人表和波表、<code>endless.lua</code>、<code>combat.lua</code>）和遊戲內繁中文字；敵人和 Boss 的數字由腳本直接執行遊戲程式裡的表抽出，不是手抄。標「推論」的是我們從招式文字推出來的對策，沒有實測勝率，也沒有進遊戲打過。</p>
+</main>
+
+<script src="data/boss.js?v=1115i"></script>
+<script src="data/boss-advice.js?v=1115i"></script>
+<script src="boss.js?v=1115i"></script>
+</body>
+</html>

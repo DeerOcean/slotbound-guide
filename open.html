@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>開局｜Slotbound 實用指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1115i">
+<link rel="stylesheet" href="css-open.css?v=1115i">
+</head>
+<body>
+<header class="top">
+  <b>Slotbound 實用指南</b>
+  <nav>
+    <a class="cur" href="open.html">開局</a>
+    <a href="slot.html">轉盤</a>
+    <a href="units.html">養兵</a>
+    <a href="imprint.html">刻印</a>
+    <a href="index.html">升階與羈絆</a>
+    <a href="shop.html">商店</a>
+    <a href="boss.html">Boss</a>
+    <a href="meta.html">局外</a>
+  </nav>
+  <div class="search">
+    <input id="q" type="search" placeholder="搜這頁，例如 450 金" autocomplete="off">
+    <div class="res" id="qres"></div>
+  </div>
+</header>
+
+<main class="guide">
+  <h1>開局：第一轉之前要決定什麼</h1>
+  <p class="lead">這頁照開一局的順序排：選哪台機器、選哪張地圖和難度、起手 450 金怎麼花、頭幾波有什麼保護、第一個核心挑誰。轉盤怎麼轉、機率怎麼算，在<a href="slot.html">轉盤頁</a>。</p>
+  <nav class="toc">
+    <a href="#machine">選機器</a><a href="#map">選地圖和難度</a><a href="#gold">起手金幣</a><a href="#safe">頭幾波保護</a><a href="#first">第一個核心</a>
+  </nav>
+
+  <section class="sec" id="machine" data-t="選機器 老虎機 微調 爆破 專屬核心 解鎖 預設">
+    <h2><span class="no">1</span>選哪台老虎機</h2>
+    <p class="adv">還沒解鎖爆破就用微調，沒有別的選項。兩台都解鎖了，新手先挑微調，結果比較好預料。<span class="infer">推論</span></p>
+    <p>兩台的差別、各自怎麼救一轉，<a href="slot.html#assist">轉盤頁</a>講過了，這裡只講開局要知道的事。</p>
+    <div class="machines">
+      <div class="panel mach">
+        <h3>微調老虎機 <small>一開始就有</small></h3>
+        <ul>
+          <li>專屬核心共 8 個，但一開始只能抽到 2 個：共鳴鏡、備用電池。其餘 6 個要在局外解鎖。</li>
+        </ul>
+      </div>
+      <div class="panel mach">
+        <h3>爆破老虎機 <small>局外解鎖</small></h3>
+        <ul>
+          <li>解鎖要花 60，前面還要先有「解封紋章」，另有關卡和難度的門檻（確切條件沒確認）。解鎖方法看<a href="meta.html">局外頁</a>。</li>
+          <li>專屬核心共 8 個，一開始只能抽到 2 個：火辣辣椒、預知手鏡。</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">不管選哪台，頭幾個核心都只抽得到「普通」和「罕見」。選機器不改變前期的核心池大小：各 19 個可抽（12 個普通、7 個罕見）。</p>
+    <details>
+      <summary>沒有任何局外升級時，哪些核心根本不會出現</summary>
+      <p>以下 26 個要局外解鎖才會進核心池。稀有和傳說核心全部在裡面，所以前期不用期待抽到稀有以上。</p>
+      <div class="lockedlist" id="lockedList"></div>
+      <p class="note">解鎖要花多少、先解哪個，看<a href="meta.html">局外頁</a>。</p>
+    </details>
+  </section>
+
+  <section class="sec" id="map" data-t="選地圖 難度 關卡 開闊森林 深邃洞窟 荒原 失落遺蹟 猩紅地獄 冰冷宇宙 簡單 普通 困難 無盡 解鎖">
+    <h2><span class="no">2</span>選哪張地圖和難度</h2>
+    <p class="adv">一開始只能玩第一張圖，挑不挑都一樣；先把它的「簡單」和「普通」通關，後面的圖和難度才會開。</p>
+    <p>共 6 張圖：開闊森林、深邃洞窟、荒原、失落遺蹟、猩紅地獄、冰冷宇宙。難度分簡單、普通、困難、無盡。</p>
+    <div class="panel">
+      <table class="mini">
+        <thead><tr><th>要玩</th><th>要先做到</th></tr></thead>
+        <tbody>
+          <tr><td>下一個難度</td><td>通關上一個難度</td></tr>
+          <tr><td>下一張地圖</td><td>用普通難度通關上一張</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>所以開局的順序是固定的：開闊森林簡單、普通，通關後才有深邃洞窟，依此類推。真正要選的是「這次要不要往上打一個難度」。</p>
+    <details>
+      <summary>第一張圖簡單難度的開頭幾波</summary>
+      <table class="mini">
+        <thead><tr><th>波數</th><th>敵人</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 波</td><td>1 隻哥布林（血量 45）</td></tr>
+          <tr><td>第 2 波</td><td>2 隻哥布林</td></tr>
+        </tbody>
+      </table>
+      <ul><li>其他地圖和難度的開頭幾波沒確認。</li><li>每張圖打贏能拿多少、值不值得換圖，看<a href="meta.html">局外頁</a>。</li></ul>
+    </details>
+  </section>
+
+  <section class="sec" id="gold" data-t="起手金幣 450 金 轉幾次 收入 每波收入 存錢 預算">
+    <h2><span class="no">3</span>起手 450 金怎麼花</h2>
+    <p class="adv">全部花在第 1 波的 3 轉（100＋150＋200＝450）。轉盤價格每波重算，錢存著不如先換成兵。</p>
+    <p>打贏一波拿到的金幣約 520（紀錄裡 500～572），這比<a href="slot.html#spins">轉盤頁</a>寫的「約 100～130」多很多，那裡的算法漏了每波結束固定給的 400。所以每一波都轉得起 3 次，多出來的錢存幾波，就多轉 1 次。</p>
+    <div class="calc panel">
+      <div class="calc-in">
+        <label for="sg">起手</label>
+        <select id="sg"><option value="450">450 金</option><option value="500">500 金（有「初始補給」）</option><option value="550">550 金（再加「補給倉庫」）</option></select>
+        <label for="inc">每波收入</label>
+        <input id="inc" type="number" inputmode="numeric" min="0" step="10" value="520">
+        <span>金</span>
+      </div>
+      <div class="tblwrap"><table class="mini" id="plan"></table></div>
+      <p class="calc-out" id="planOut"></p>
+    </div>
+    <details>
+      <summary>為什麼是每波平均花、不是先省再爆發</summary>
+      <ul>
+        <li>連轉 k 次要花 25k²＋75k 金：1 轉 100、2 轉 250、3 轉 450、4 轉 700、5 轉 1,000。轉越多越貴，平均分給每一波最便宜。</li>
+        <li>上面的表是「每波能轉幾次就轉幾次」的算法。真實紀錄 10 局裡，第 1～4 波的轉動次數中位數是 3、3、4、3，跟表很接近。</li>
+        <li>前 3 轉內有保證中獎，所以第 1 波轉滿 3 轉通常不會一條線都沒有。</li>
+        <li><span class="infer">推論</span>前期每個兵都在換更多的兵，拖到後面才轉，等於讓前幾波少一批兵。</li>
+      </ul>
+    </details>
+    <details>
+      <summary>收入的來源與數字</summary>
+      <ul>
+        <li>每波結束，程式固定給 400；打贏還會再加一些。紀錄裡打贏一波總共拿 500～572，中位數 523（162 波）。</li>
+        <li>打輸的波收入沒有統計，不確定。</li>
+        <li>起手 450 是基本值，局外升級最多加到 550。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="safe" data-t="頭幾波保護 第1波 第2波 第3波 新手護盾 逆轉拉桿 保證中獎 生命">
+    <h2><span class="no">4</span>第 1～3 波有什麼保護</h2>
+    <p class="adv">不用先存錢防身。頭幾波的敵人很少，真正有保護的只有一條：第 1 波前 3 轉內保證中一次。</p>
+    <div class="panel">
+      <table class="mini">
+        <thead><tr><th>保護</th><th>一開始有嗎</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 波，前 3 轉內保證中一次</td><td>有</td></tr>
+          <tr><td>第 2、3 波連輸後補線（<a href="slot.html#pity">細節</a>）</td><td>有</td></tr>
+          <tr><td>新手護盾：第 1～4 波擋掉第一次失去生命</td><td>局外解鎖</td></tr>
+          <tr><td>逆轉拉桿：失去生命後，下一轉保證中，一局 1 次</td><td>局外解鎖</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">新手護盾和逆轉拉桿要在局外解鎖，沒解鎖就沒有。第 1 波的保證中獎每一局都有，不只教學（實際 10 局紀錄都符合）。</p>
+    <details>
+      <summary>為什麼前三波不太會死</summary>
+      <ul>
+        <li>第一張圖簡單難度，第 1 波只有 1 隻哥布林，第 2 波 2 隻。第 1 波 3 轉的保證，加上起手 3 轉，通常至少有 1 個兵擋。<span class="infer">推論</span></li>
+        <li>其他地圖和難度的頭幾波沒確認，這句只對第一張圖簡單難度成立。</li>
+        <li>生命基礎值沒直接看到，從升級「額外生命」寫的「6 → 7」往回推，沒升級時大約 5。<span class="infer">推論</span></li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="first" data-t="第一個核心 第5轉 核心 挑哪個 3選1 重抽 貪心之尾 扭曲之鈴 倒轉時鐘">
+    <h2><span class="no">5</span>第一個核心挑誰</h2>
+    <p class="adv">優先挑「沒中時省錢或多一次機會」的核心：扭曲之鈴、貪心之尾。看到普通的就別急著重抽，重抽也要錢。</p>
+    <p>第 5 次付錢轉動之後，給你 3 選 1。照 3 轉一波算，是第 2 波途中：紀錄 10 局裡 9 局在第 2 波，1 局在第 3 波。有局外升級「提前抉擇」可以提早 1 轉。</p>
+    <p>這個時候核心池還只有 19 個（見第 1 段）。第一個核心出稀有的機率是 2%，但沒有稀有可抽，會往下改抽罕見或普通。<span class="infer">推論</span>所以實際上差不多是 8 成普通、2 成罕見。</p>
+    <div class="panel">
+      <div class="tierhd" id="tierHd"></div>
+      <div class="clist" id="firstList"></div>
+    </div>
+    <details>
+      <summary>為什麼這樣排（推論）</summary>
+      <ul>
+        <li>一波轉 3 次是常態（見上一段），所以「每波第 3 次轉動沒中，最多重轉 2 次」的貪心之尾幾乎每波都用得上。</li>
+        <li>扭曲之鈴每波首轉沒中就免費再轉 1 次，等於每波省下一次花費。</li>
+        <li>倒轉時鐘只是省錢，金額小，排在第二層。金牙省得更多，但要局外解鎖，前期抽不到。</li>
+        <li>錢袋要看「剩餘轉動次數」怎麼算，遊戲字面沒寫清楚，沒確認。</li>
+        <li>以上是照核心文字和每波 3 轉的事實推的，沒有實測勝率。</li>
+      </ul>
+    </details>
+    <details>
+      <summary>3 個選項都不想要</summary>
+      <ul>
+        <li>花錢重抽：第一次 1，之後每次多 1。局外升級「核心重抽」、「核心重抽 II」各給 1 次免費。</li>
+        <li>也可以選擇不拿。略過之後下次什麼時候再給，沒確認。</li>
+        <li>局外升級「璀璨首選」讓第一次的 3 個選項裡一定有 1 個罕見以上，「餘暉」讓第二次也有。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="meta" data-t="局外升級 開局 加成 提前抉擇 初始補給 出征補給">
+    <h2><span class="no">6</span>哪些局外升級會改開局</h2>
+    <p class="adv">想讓前期更穩，優先看這 8 個。各花多少、怎麼解鎖，看<a href="meta.html">局外頁</a>。</p>
+    <div class="panel">
+      <table class="mini">
+        <thead><tr><th>升級</th><th>開局的效果</th></tr></thead>
+        <tbody>
+          <tr><td>初始補給</td><td>起手金幣 +50（450 → 500）</td></tr>
+          <tr><td>補給倉庫</td><td>再 +50（500 → 550）</td></tr>
+          <tr><td>新手護盾</td><td>第 1～4 波擋掉第一次失去生命</td></tr>
+          <tr><td>逆轉拉桿</td><td>失去生命後下一轉保證中，一局 1 次</td></tr>
+          <tr><td>提前抉擇</td><td>第一個核心提早 1 轉（第 4 轉）</td></tr>
+          <tr><td>璀璨首選</td><td>第一次核心選項一定有罕見以上</td></tr>
+          <tr><td>核心重抽、核心重抽 II</td><td>每局各多 1 次免費重抽</td></tr>
+          <tr><td>出征補給</td><td>開局就帶「傭兵契約書」</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="src-note">資料來源：遊戲程式（反編譯）、遊戲內繁中文字、本機 10 局真實戰績。標「推論」的是我們從數字推出來的，不是遊戲寫明的。</p>
+</main>
+
+<script src="data/cores.js?v=1115i"></script>
+<script src="data/open-data.js?v=1115i"></script>
+<script src="open.js?v=1115i"></script>
+</body>
+</html>

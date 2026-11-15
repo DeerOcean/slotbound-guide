@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slotbound 實用指南：商店</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1115i">
+<link rel="stylesheet" href="css-shop.css?v=1115i">
+</head>
+<body>
+<header class="top">
+  <b>Slotbound 實用指南</b>
+  <nav>
+    <a href="open.html">開局</a>
+    <a href="slot.html">轉盤</a>
+    <a href="units.html">養兵</a>
+    <a href="imprint.html">刻印</a>
+    <a href="index.html">升階與羈絆</a>
+    <a class="cur" href="shop.html">商店</a>
+    <a href="boss.html">Boss</a>
+    <a href="meta.html">局外</a>
+  </nav>
+  <div class="search">
+    <input id="q" type="search" placeholder="搜這頁，例如 拳套、重抽" autocomplete="off">
+    <div class="res" id="qres"></div>
+  </div>
+</header>
+
+<main class="guide">
+  <h1>商店：精髓該買什麼</h1>
+  <p class="lead">商店用「精髓」買道具，道具只強化打仗，不影響轉盤。精髓很少，所以這頁照一局裡會遇到的決定排：精髓夠不夠、商店怎麼換、前期買什麼、錢多了買什麼、升級還是買新的。</p>
+  <nav class="toc">
+    <a href="#budget">精髓夠花嗎</a><a href="#refresh">商店怎麼換</a><a href="#early">前期買什麼</a><a href="#late">後期買什麼</a><a href="#upgrade">升級還是買新的</a><a href="#sword">護衛劍</a><a href="#list">63 個道具</a><a href="#unsure">還沒確認</a>
+  </nav>
+
+  <section class="sec" id="budget" data-t="精髓 夠不夠 收入 每波 起手 應急精華 核心重抽">
+    <h2><span class="no">1</span>精髓夠花嗎</h2>
+    <p class="adv">第 10 波之前一共只有約 18 精髓，等於 2 件普通加 1 件罕見。別想一次買齊，先挑最有用的 2 到 3 件。</p>
+    <p>精髓每波結束固定 +1。打贏第 5、15、25 波再 +3，打贏第 10、20、30 波再 +5。一轉連 5 條線還 +2。開局是 0，局外升級「應急精華」才會多給 2。所以<b>第 1 波結束後只有 1 精髓</b>，要到第 2 波結束才買得起第一件 2 精髓的道具。</p>
+    <div class="calc panel">
+      <div class="calc-in">
+        <label for="bw">我打到第</label>
+        <input id="bw" type="number" inputmode="numeric" min="1" max="60" step="1" value="10">
+        <span>波，累計精髓：</span>
+        <label class="chk"><input id="bwin" type="checkbox" checked> 每波都打贏</label>
+        <label class="chk"><input id="bst" type="checkbox"> 有「應急精華」</label>
+      </div>
+      <div class="ladder" id="eLadder"></div>
+      <p class="calc-out" id="eOut"></p>
+    </div>
+    <details>
+      <summary>精髓還能花在哪、還能從哪來</summary>
+      <ul>
+        <li>花在：商店道具、商店重抽、核心三選一的重抽、賣掉道具換回（見下面兩段）。</li>
+        <li>核心重抽：第 1 次 1 精髓，之後每重抽一次 +1。<span class="infer">推論</span>下一次選核心時會不會從 1 重來，程式裡沒確認。</li>
+        <li>額外來源：吸收帶「金蛋」特質的兵，被吃的那一刻 +1～5 精髓；核心「回聲之鏡」未中獎但盤上有 4 個以上相同符號時 +1。</li>
+        <li>打輸的那一波仍然 +1，只是沒有 5、10 的整數獎勵。</li>
+        <li>上面的累計不含轉盤連 5 條線、金蛋、核心，這些都是額外的。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="refresh" data-t="商店怎麼換 重抽 刷新 稀有度 機率 權重 三格 每兩波 已持有 地圖 解鎖">
+    <h2><span class="no">2</span>商店怎麼換、會出什麼</h2>
+    <p class="adv">前 4 波商店只出普通和罕見，稀有要到第 5 波起，傳說要到第 15 波起而且只有 1%。想要的稀有道具別等，看到就買。</p>
+    <p>商店每 2 波換一批，每批 3 格（第 1～2 波同一批、第 3～4 波同一批，依此類推）。每一格先抽稀有度，再從這個稀有度裡隨便抽一件。已經買到滿級的道具不會再出現；<b>買了但還沒滿級的會再出現</b>，買它就是升一級。有些道具只在特定地圖出現，有些要先在局外解鎖。</p>
+    <div class="calc panel">
+      <div class="calc-in">
+        <label for="ow">商店在第</label>
+        <input id="ow" type="number" inputmode="numeric" min="1" max="60" step="1" value="5">
+        <span>波</span>
+        <label for="om">地圖</label>
+        <select id="om"></select>
+        <label for="ou">道具</label>
+        <select id="ou"><option value="open">只有一開始就有的</option><option value="all">局外全解鎖</option></select>
+      </div>
+      <div class="tblwrap"><table class="mini otbl" id="oTbl"></table></div>
+      <p class="calc-out" id="oOut"></p>
+    </div>
+    <p class="note">重抽：第一次 2 精髓，每重抽一次 +1，下一批商店重新從 2 算。局外升級「商店重抽」可以讓第一次便宜 1。重抽用的是你按下去那一刻的波數算稀有度。<span class="infer">推論</span>表上的「某一件」機率是粗估，沒扣掉同批不重複的影響。</p>
+    <details>
+      <summary>每個波段的稀有度比例（%）</summary>
+      <table class="mini" id="wTbl"></table>
+      <ul>
+        <li>這個稀有度在這張地圖沒有可出的道具時，會改抽下一個有的稀有度（順序普通、罕見、稀有、傳說）。</li>
+        <li>賣出：道具欄裡進入刪除模式點道具，換回「這件已付價錢總和」的一半（局外升級「回收帳本」後 80%），無條件捨去。買錯了損失一半。</li>
+        <li>道具欄預設 6 格，局外升級可到 7、8 格。</li>
+        <li>局外升級「熟客折扣」：每局一次，買一件道具便宜 1 精髓（只在價格大於 1 時）。</li>
+        <li>局外升級「商品鎖定」「專精物品研究」在遊戲程式裡找不到實際使用的地方，沒確認有沒有效果。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="early" data-t="前期 前四波 先買 便宜 普通 拳套 盾牌 鎧甲 急救包">
+    <h2><span class="no">3</span>前期（第 1～4 波）先買什麼</h2>
+    <p class="adv">先買不看陣容的 2 精髓普通道具：堅固拳套、堅固盾牌、前線鎧甲、急救包。每一件第 1 級都最便宜，先買不同的比把同一件升級划算。<span class="infer">推論</span></p>
+    <p>這個階段你的兵很少、精髓很少，不要買只對某個職業或某張地圖有用的東西。下面是我們從數字挑出來的，點名字跳到圖鑑看完整數值。沒有實際打過，只是照效果文字和價錢比。</p>
+    <div class="earlybox panel" id="earlyBox"></div>
+    <details>
+      <summary>為什麼手冊（職業訓練書）前期不推</summary>
+      <ul>
+        <li>手冊第 1 級 3 精髓，只加一個職業的一項屬性（例如戰士血量 +6%），同價位的堅固拳套是全隊普攻傷害 +6%，還便宜 1 精髓。<span class="infer">推論</span></li>
+        <li>手冊適合陣容幾乎全是同一職業之後再補。「盾衛手冊」和「速射手冊」是罕見，要局外解鎖或搭配特定職業。</li>
+        <li>工程羈絆湊到 3 種不同職業時，手冊也會多 1 級，見「升級還是買新的」。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="late" data-t="後期 稀有 傳說 燃燒之心 緊繃弓弦 團結項鍊 行商包袱 7精髓 10精髓">
+    <h2><span class="no">4</span>錢多了：稀有和傳說值不值</h2>
+    <p class="adv">稀有（7 精髓）和傳說（10 精髓）都要看陣容，不是越貴越好。例如「緊繃弓弦」第 1 級淨效果只有約 +9%，要升到第 2 級才有感。</p>
+    <p>傳說很難在商店遇到：第 15 波起每格只有 1%，第 21 波起 2%。打普通難度（20 波）全程只看到 9 格傳說機會，不計重抽，至少看到一件的機率大約 9%。所以不要為了等傳說省錢，出現了再說。</p>
+    <div class="panel" id="lateBox"></div>
+    <details>
+      <summary>緊繃弓弦、燃燒之心：把「加傷害但有代價」算成淨效果</summary>
+      <table class="mini" id="netTbl"></table>
+      <ul>
+        <li>算法：傷害倍率 × 攻速倍率。這是只看普通攻擊的粗估，技能傷害和冷卻會不會跟著攻速變，沒確認。<span class="infer">推論</span></li>
+        <li>燃燒之心沒有攻速代價，但最大血量 −20%，前排先倒的隊伍要小心。</li>
+        <li>第 3 級的緊繃弓弦是工程羈絆才有的加成級，不是商店能買到的。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="upgrade" data-t="升級 還是買新的 單價 工程 加一級 羈絆 回收 賣出">
+    <h2><span class="no">5</span>升級還是買新的</h2>
+    <p class="adv">第 1 級最划算，往後每升一級價錢更高、效果只多一點。精髓有限時，先湊 2～3 件不同的第 1 級，再回頭升級。<span class="infer">推論</span></p>
+    <p>普通道具共同的規律：第 1 級是整份效果，之後每升一級只多加第 1 級的一半。價錢卻是 2、3、4 往上。下面用堅固拳套、堅固盾牌算給你看（照遊戲數字，沒打過）。</p>
+    <div class="panel"><div class="tblwrap"><table class="mini" id="upTbl"></table></div></div>
+    <details>
+      <summary>工程羈絆：道具免費多一級</summary>
+      <ul>
+        <li>工程羈絆湊到 2 種不同職業：戰鬥道具高 1 級生效，滿級的也算（所以文字裡多出一個高一級的數值）。</li>
+        <li>湊到 3 種：連手冊也高 1 級。</li>
+        <li>這一級不用付精髓，只在戰鬥時生效；圖鑑裡標「工程加成」的就是這一級。</li>
+        <li>羈絆怎麼湊看「升階與羈絆」那頁。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="sword" data-t="護衛劍 皇冠 劍 吸收等級 最高 友軍 7精髓">
+    <h2><span class="no">6</span>護衛劍：值不值 7 精髓</h2>
+    <p class="adv">護衛劍適合隊裡有一隻明顯最強、吸收等級最高的主力。它跟著那隻跑，主力一死整場就沒了。</p>
+    <div class="panel sword">
+      <ul>
+        <li>每場開打時，劍會跟著吸收等級最高的友軍（不算召喚物、分身、塔）。等級一樣，取隊伍排在前面的。</li>
+        <li>兩把劍各 1.5 秒砍一刀，每刀是主人攻擊力的 0.3 倍（升到第 2 級 0.45 倍），合起來約每秒 0.4 倍（第 2 級 0.6 倍）攻擊力。</li>
+        <li>不吃攻速，只砍主人身邊 65 單位內最近的敵人；主人被控制時劍也停。</li>
+        <li>算道具傷害，所以不會觸發「普攻時」才發動的刻印。價格 7 精髓。</li>
+      </ul>
+    </div>
+    <details>
+      <summary>跟堅固拳套比，哪個划算（粗估）</summary>
+      <table class="mini" id="swTbl"></table>
+      <ul>
+        <li>假設：全隊每隻每秒普攻 1 次、每下 1 倍攻擊力、只看普通攻擊。實際隊伍和攻速都不一樣，這只是量級比較。<span class="infer">推論</span></li>
+        <li>劍不吃攻速，所以主人攻速慢、單下很痛（例如法師）時，劍相對更值；主人攻擊力比全隊平均高時也更值。</li>
+        <li>拳套加的是整隊，隊伍越大越划算；兵少時劍的比例比較高。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="list" data-t="道具圖鑑 63 全部道具 稀有度 類型 地圖 解鎖 篩選">
+    <h2><span class="no">7</span>63 個道具一覽</h2>
+    <p class="adv">先用稀有度和地圖篩掉用不到的。標「局外解鎖」的要先在局外花源石才會出現在商店。</p>
+    <p>價錢一律是精髓，括號裡是 1 級 → 2 級 → 3 級的價格。「地圖」是限定出現在哪一關，「通用」是每張圖都可能出現。</p>
+    <div class="panel">
+      <div class="cfilter">
+        <span class="flabel">稀有度：</span><span id="fR"></span>
+        <span class="flabel">類型：</span><span id="fT"></span>
+        <span class="flabel">地圖：</span><span id="fM"></span>
+        <span class="flabel">解鎖：</span><span id="fU"></span>
+        <span class="flabel">適合：</span><span id="fF"></span>
+      </div>
+      <p class="note" id="icount"></p>
+      <div class="ilist" id="ilist"></div>
+    </div>
+    <details>
+      <summary>局外解鎖要花多少</summary>
+      <table class="mini" id="unTbl"></table>
+      <ul>
+        <li>花費單位照局外升級樹的數字標「源石」；完整的局外升級樹和進度條件看「局外」那頁。</li>
+        <li>「前置」是要先買的上一個節點；「進度」是要先通關的地圖和難度。<span class="infer">推論</span>進度欄的兩個數字依序是地圖、難度，從程式欄位名推出，沒進遊戲核對。</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="sec" id="unsure" data-t="沒確認 不確定 未驗證">
+    <h2><span class="no">8</span>還沒確認的</h2>
+    <details open>
+      <summary>這頁哪些沒有實際進遊戲核對</summary>
+      <ul>
+        <li>所有數字都是從遊戲程式和遊戲內繁中文字讀出來，沒有進遊戲驗證過。</li>
+        <li>「前期買什麼」「後期值不值」是我們用數字推的，沒有實測勝率，標「推論」。</li>
+        <li>商店換批的時間點（每 2 波）有兩段程式一致，但打輸、跳波時會不會有例外，沒確認。</li>
+        <li>有 1 件道具（木製射擊塔）程式裡標的幣別是金幣，但實際購買時一律扣精髓，這裡照扣精髓寫，沒進遊戲確認。</li>
+        <li>局外「商品鎖定」「專精物品研究」沒找到使用的地方，不確定有沒有效果。</li>
+        <li>團結項鍊在遊戲的試玩版不會出現，正式版有沒有開放這裡沒查。</li>
+      </ul>
+    </details>
+  </section>
+
+  <p class="src-note">資料來源：遊戲程式（反編譯）和遊戲內繁中文字。標「推論」的是我們從數字推出來的，不是遊戲寫明的。</p>
+</main>
+
+<script src="data/shop.js?v=1115i"></script>
+<script src="data/shop-notes.js?v=1115i"></script>
+<script src="shop.js?v=1115i"></script>
+</body>
+</html>

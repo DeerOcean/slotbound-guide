@@ -53,7 +53,7 @@ h1{font-family:"Noto Serif TC",serif;font-size:28px;line-height:1.3;margin:8px 0
 .g-legendary .gd{color:var(--gold);border-color:var(--gold)}
 .g-prism .gd{color:var(--wine);border-color:var(--wine)}
 .r1{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
-.r1 .r{font-size:10px;margin-right:4px}
+.r1 .r{font-size:11px;margin-right:4px}
 .brs{display:flex;flex-wrap:wrap;gap:6px 22px}
 .br{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .br .arrow{color:var(--muted);font-size:12px}
@@ -114,7 +114,7 @@ h1{font-family:"Noto Serif TC",serif;font-size:28px;line-height:1.3;margin:8px 0
 .branch{display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
 .branch .arrow{color:var(--muted);font-size:12px;padding-top:6px}
 .cls{position:relative;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer;line-height:1.4;text-align:left}
-.cls .r{font-size:10px;color:var(--muted);margin-right:4px}
+.cls .r{font-size:11px;color:var(--muted);margin-right:4px}
 .cls .fx{display:block;font-size:11px;color:var(--muted)}
 .cls:hover{border-color:var(--gold)}
 .cls.in{background:var(--gold);border-color:var(--gold);color:var(--paper)}
@@ -193,7 +193,7 @@ h1{font-family:"Noto Serif TC",serif;font-size:28px;line-height:1.3;margin:8px 0
 /* ===== 指南頁（轉盤等）：一段一個決定，先建議再理由 ===== */
 .guide{max-width:880px}
 /* 內文行長約 44 字（2026-11-15 托盤 20261115-3d09315f-006 選 44；面板和計算機維持原寬） */
-.guide > p,.guide .sec > p,.guide details ul,.guide .mach p,.guide .mach ul{max-width:44em}
+.guide p,.guide li,.guide details ul,.guide .mach ul{max-width:44em}
 .toc{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}
 .toc a{font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:3px 12px}
 .toc a:hover{border-color:var(--gold)}
@@ -214,6 +214,12 @@ h1{font-family:"Noto Serif TC",serif;font-size:28px;line-height:1.3;margin:8px 0
 .mini{border-collapse:collapse;font-size:13px;margin:4px 0 10px;font-variant-numeric:tabular-nums}
 .mini th,.mini td{padding:4px 12px;border-bottom:1px solid var(--line);text-align:left}
 .mini th{font-weight:500;color:var(--muted)}
+/* 各頁共用表格 */
+.tblwrap{overflow-x:auto;margin:8px 0 4px}
+.tblwrap .mini{margin:0;min-width:100%}
+.mini td.n,.mini th.n{text-align:right}
+.mini td.hi{color:var(--teal);font-weight:700}
+.mini tr.grp td{background:var(--bg);color:var(--muted);font-size:12px}
 .src-note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 
 /* 價格階梯 */

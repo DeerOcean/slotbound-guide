@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>養兵：Slotbound 實用指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1115i">
+<link rel="stylesheet" href="css-units.css?v=1115i">
+</head>
+<body>
+<header class="top">
+  <b>Slotbound 實用指南</b>
+  <nav>
+    <a href="open.html">開局</a>
+    <a href="slot.html">轉盤</a>
+    <a class="cur" href="units.html">養兵</a>
+    <a href="imprint.html">刻印</a>
+    <a href="index.html">升階與羈絆</a>
+    <a href="shop.html">商店</a>
+    <a href="boss.html">Boss</a>
+    <a href="meta.html">局外</a>
+  </nav>
+  <div class="search">
+    <input id="q" type="search" placeholder="搜這頁，例如 便當" autocomplete="off">
+    <div class="res" id="qres"></div>
+  </div>
+</header>
+
+<main class="guide">
+  <h1>養兵：兵怎麼變強最快</h1>
+  <p class="lead">這遊戲的兵不是靠打仗升級，是靠「吃兵」：把一隻兵吸收進另一隻，給對方加吸收等級（LV）。LV 到門檻就能升階，屬性一次翻好幾倍。這頁照順序講：吃一隻給幾級、怎麼餵最划算、升階要多少、刻印和特質怎麼來、覺醒。</p>
+  <nav class="toc">
+    <a href="#absorb">吃一隻給幾級</a><a href="#feed">怎麼餵最划算</a><a href="#rank">升階門檻</a><a href="#imprint">刻印摘要</a><a href="#traits">隨機特質</a><a href="#awaken">覺醒</a>
+  </nav>
+
+  <section class="sec" id="absorb" data-t="吸收 吃兵 公式 計算機 便當 刻印 轉換 加成 吸收等級 LV 幾級">
+    <h2><span class="no">1</span>吃一隻給幾級</h2>
+    <p class="adv">白板新兵（沒刻印、沒便當）只給 +1 級；值錢的是身上有刻印、帶便當、等級已經不低的兵。餵之前先在下面算一次。</p>
+    <p>公式：<b>+級數 = 1 + 對方刻印的分數 + 對方等級 ÷ 3（無條件捨去）+ 便當 + 轉換加成</b>。刻印的分數在下面展開看；轉換加成只有在刻印滿級或格子滿了選「保留」時才有。</p>
+    <div class="calc panel" id="calcBox">
+      <h3>被吃的那隻兵</h3>
+      <div class="ugrid">
+        <label class="f"><span>稀有度</span><select id="vGrade"></select></label>
+        <label class="f"><span>吸收 LV</span><input id="vLv" type="number" inputmode="numeric" min="1" max="999" step="1" value="1"></label>
+        <label class="f"><span>便當（+幾級）</span><input id="vBento" type="number" inputmode="numeric" min="0" max="5" step="1" value="0"></label>
+      </div>
+      <div class="f2"><span class="flabel">身上的刻印（每格選稀有度和等級）：</span></div>
+      <div id="vImps" class="imps"></div>
+      <label class="chk"><input type="checkbox" id="vConv"><span>這次有轉換加成（我的刻印已滿級，或格子滿了選「保留」）</span></label>
+      <h3>我的主力（選填）</h3>
+      <div class="ugrid">
+        <label class="f"><span>稀有度</span><select id="mGrade"></select></label>
+        <label class="f"><span>現在 LV</span><input id="mLv" type="number" inputmode="numeric" min="1" max="999" step="1" value="1"></label>
+      </div>
+      <div class="quick" id="presets"></div>
+      <p class="calc-out" id="absOut"></p>
+      <p class="calc-sub" id="absSub"></p>
+    </div>
+    <details>
+      <summary>刻印分數、轉換加成怎麼算</summary>
+      <ul>
+        <li>每個刻印的分數 = 稀有度分 + （等級 − 1）。稀有度分：普通 1、高階 2、稀有或特殊 3、傳說 4、稜彩 5。例如高階 2 級刻印 = 2 + 1 = 3 分。</li>
+        <li>被吃的兵身上有幾個刻印就全部加起來。這些刻印不會轉給你，只有分數算進去。</li>
+      </ul>
+      <div class="tbl-wrap"><table class="mini" id="convTbl"></table></div>
+      <ul>
+        <li>轉換加成看<b>被吃的那隻</b>是什麼稀有度。</li>
+        <li>你得到的是對方符號固定的「招牌刻印」，有四種情況：格子有空位，直接裝上（強制）；已有同一個，升 1 級；已經滿級，自動轉換成吸收 LV（拿轉換加成）；格子滿了且是別的刻印，你選「替換」或「保留」，選「保留」就拿轉換加成。</li>
+      </ul>
+    </details>
+    <details>
+      <summary>四組手算過的例子（點「試算」帶進計算機）</summary>
+      <div class="tbl-wrap"><table class="mini" id="exTbl"></table></div>
+      <p class="note">每組都是從原始碼的公式自己手算一遍，再跟計算機結果對過。</p>
+    </details>
+  </section>
+
+  <section class="sec" id="feed" data-t="餵養 策略 先吃 互吃 主力 直接餵 保留 湊數 便當 存刻印 吃幾隻">
+    <h2><span class="no">2</span>怎麼餵最划算</h2>
+    <p class="adv">主力的刻印還沒滿時，別一隻一隻直接餵：先讓一隻兵吃 2 隻（或 5 隻）同符號新兵，再整隻餵給主力，每隻新兵平均 +1.33 級，直接餵只有 +1。<span class="infer">推論</span></p>
+    <p>原因：先被吃過的兵身上有刻印，被吃時刻印分數會跟著算進去，等於一次把好幾隻的分數換成等級。這是依公式模擬的結果，沒有進遊戲實測。</p>
+    <ul class="tips">
+      <li><b>高稀有度的當主力</b>，其他都餵牠。身上帶便當的兵一律拿去餵，不要養。</li>
+      <li><b>主力刻印滿了以後，直接餵最划算</b>：每隻普通新兵 +2（+1 加轉換 +1），比先互吃的平均還高。</li>
+      <li><b>主力的刻印格只留給想要的刻印。</b>替換時舊刻印直接蓋掉，不退等級，也沒有移除刻印的功能；有空格時一定會被裝上。</li>
+      <li><b>不想要的刻印</b>，先讓普通兵吃下去存著，最後整隻餵給主力，那份刻印分數就換成等級了。格子滿了就一律選「保留」。</li>
+      <li><b>差一點就能升階</b>時，可以讓普通兵互吃湊數。</li>
+    </ul>
+    <details>
+      <summary>先吃幾隻再餵：每隻新兵平均多少級</summary>
+      <p class="note">假設：同符號的白板普通新兵，主力是普通兵。「刻印沒滿」＝餵進去只是升刻印；「刻印已滿」＝餵進去拿轉換加成。</p>
+      <div class="tbl-wrap"><table class="mini" id="preTbl"></table></div>
+    </details>
+    <details>
+      <summary>升階要吃幾隻白板新兵（快慢兩種吃法）</summary>
+      <p class="note">快：每個刻印格先各吃進一隻不同符號的新兵（各 +1），格滿以後都吃身上沒有的符號並選「保留」（每隻 +2）。慢：全吃同一個符號，刻印 1 升到 5 級的前 5 隻各 +1，之後才有轉換（每隻 +2）。假設每隻都是普通白板、沒便當。</p>
+      <div class="tbl-wrap"><table class="mini" id="needTbl"></table></div>
+    </details>
+  </section>
+
+  <section class="sec" id="rank" data-t="升階 門檻 倍率 LV 2階 3階 轉職 屬性 稜彩 傳說 稀有 高階 普通 特殊 刻印格">
+    <h2><span class="no">3</span>升階門檻</h2>
+    <p class="adv">升階比單純堆等級值錢：普通兵吸收到 LV 5 就能升 2 階，屬性約 ×2.2；同樣的攻擊，等級堆到 100 也只有約 ×1.64。先衝門檻，再想要不要繼續吃。<span class="infer">推論</span></p>
+    <p>門檻看稀有度，越稀有越高；所有稀有度最高都是 3 階。這裡的「升階倍率」是原始碼裡的數字，它套在哪幾項屬性上我們沒逐項確認，所以上面那句是拿數字對數字比的。</p>
+    <details open>
+      <summary>各稀有度的升階門檻和倍率</summary>
+      <div class="tbl-wrap"><table class="mini" id="rankTbl"></table></div>
+    </details>
+    <details>
+      <summary>吸收等級單獨給多少屬性（沒升階時）</summary>
+      <div class="tbl-wrap"><table class="mini" id="multTbl"></table></div>
+      <p class="note">每 1 級：攻擊 +1%、生命 +1.5%、攻速 +0.5%，但越高越遞減。上表是照原始碼的曲線算出來的。</p>
+    </details>
+  </section>
+
+  <section class="sec" id="imprint" data-t="刻印 招牌 招牌刻印 堅固 增幅 升滿 吸血 連鎖 威儀 破滅 齊射 致盲 蓄勢 影分身 轉換">
+    <h2><span class="no">4</span>刻印摘要</h2>
+    <p class="adv">刻印是從「吃兵」拿到的，而且拿到哪個由對方的符號和稀有度決定。想要哪個刻印，就去吃對的符號和稀有度的兵。每種刻印的效果和升級幅度，看<a href="imprint.html">刻印頁</a>。</p>
+    <p>下表是「吃哪種兵，會拿到哪個刻印」。對方身上原本的刻印不會轉給你。</p>
+    <details open>
+      <summary>招牌刻印對照（符號 × 稀有度）</summary>
+      <div class="tbl-wrap"><table class="mini sigtbl" id="sigTbl"></table></div>
+      <p class="note">小丑符號在表裡沒有對應刻印。特殊稀有度的兵沒有單獨一欄，這頁沒確認它拿哪個。</p>
+    </details>
+    <p>吃不到的刻印：<b id="notSig"></b>。我們沒在程式裡找到別的取得方式，所以這兩個到底怎麼拿到，<b>沒確認</b>。</p>
+    <p><b>升到滿級有感的</b>：連鎖（1 彈到 5 彈）、威儀（削弱 12% 到 42%）、破滅（持續傷害 6% 到 20%）、齊射和致盲（約 3.25 倍）、吸血（4% 到 12%）。</p>
+    <p><b>升到滿級差不多的</b>：增幅（範圍 ×1.3 到 ×1.5）、影分身（70% 到 90%）、蓄勢（×1.25 到 ×1.8）、穿刺傷害（25% 到 35%）、巨大化（+25% 到 35%）。<span class="infer">推論</span>這是拿 1 級和 5 級數字比出來的感覺，不是遊戲寫的。</p>
+  </section>
+
+  <section class="sec" id="traits" data-t="隨機特質 特質 便當 金蛋 成長加速 出生 升階 機率 解鎖 稀有 傳說 普通">
+    <h2><span class="no">5</span>隨機特質</h2>
+    <p class="adv">身上有「便當」的兵不要養，直接餵主力：被吃時多給 +1～5 級（平均約 2.2），一隻頂好幾隻白板。</p>
+    <p>每隻新兵出生時固定抽到 1 個特質，升階時也會再抽。總共 32 種，下面可以篩選。沒解鎖任何東西時，出生時只抽得到普通和一部分稀有、傳說的特質。</p>
+    <div class="panel">
+      <div class="cfilter">
+        <span class="flabel">稀有度：</span><span id="tfR"></span>
+        <span class="flabel">什麼時候抽到：</span><span id="tfS"></span>
+      </div>
+      <div class="clist tlist" id="tlist"></div>
+    </div>
+    <details>
+      <summary>各稀有度被抽中的權重、便當點數機率</summary>
+      <div class="tbl-wrap"><table class="mini" id="tw"></table></div>
+      <ul id="twNote"></ul>
+    </details>
+  </section>
+
+  <section class="sec" id="awaken" data-t="覺醒 沉睡之力 成長分支 3選1 候選 里程碑 LV30 LV60 LV100 轉職">
+    <h2><span class="no">6</span>覺醒</h2>
+    <p class="adv">想讓主力多一個選擇，先去局外花 12 買「沉睡之力」；之後兵的吸收等級到 30、60、100 時，會跳出 3 選 1 的覺醒。</p>
+    <p id="awText"></p>
+    <details>
+      <summary>每個等級門檻和細節</summary>
+      <div class="tbl-wrap"><table class="mini" id="awTbl"></table></div>
+      <ul id="awList"></ul>
+    </details>
+  </section>
+
+  <p class="src-note">資料來源：遊戲程式（反編譯）和遊戲內繁中文字。標「推論」的是我們從數字推出來的，不是遊戲寫明的。標「沒確認」的是還沒查到答案。</p>
+</main>
+
+<script src="data/units.js?v=1115i"></script>
+<script src="data/units-sim.js?v=1115i"></script>
+<script src="units.js?v=1115i"></script>
+</body>
+</html>
