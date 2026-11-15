@@ -6,7 +6,7 @@
 <title>Slotbound 實用指南</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1115i">
+<link rel="stylesheet" href="style.css?v=1115j">
 </head>
 <body>
 <header class="top">
@@ -30,6 +30,72 @@
 <main>
   <h1>升階與羈絆規劃器</h1>
   <p class="lead">點職業加進隊伍，右邊算出湊到哪些羈絆。滑鼠移到職業上（手機點一下）看升階路線和同羈絆的人。</p>
+  <div class="guide comp">
+  <section class="sec" id="comp" data-t="配陣 陣型 站位 前排 後排 主力 怎麼排 Boss 羈絆怎麼挑">
+    <h2>配陣：先擋得住，再談輸出</h2>
+    <p class="adv">先有站得住的前排，再加輸出；主力至少養兩隻。每逢 5 的倍數波（第 5、10、15…）漏掉一隻敵人就整局結束，全堆輸出最容易死在這幾波。</p>
+    <ul class="comp-pts">
+      <li><b>骨架從戰士、弓手、槍兵挑。</b>這三種平均 16 轉出一隻；法師、騎兵要 37 轉，決鬥者要 125 轉，來了再用，別把陣容押在上面。</li>
+      <li><b>第 10 波 Boss 前，先求 2 種職業的羈絆。</b>一波大約轉 3 次，到第 10 波手上約 8～10 隻兵，兵又要升到 2 階才有羈絆，湊不到 4 種。<span class="infer">推論</span></li>
+      <li><b>同職業兩隻只算一種。</b>羈絆數的是「不同職業有幾種」，升階時挑同羈絆、不同職業的。下面的規劃器就是排這個的。</li>
+      <li><b>不要只養一隻主力。</b>荒野吹笛者每 12 秒把你戰力最高的兵拉去幫它 3 秒，骷髏龍專挑攻擊最高的兵吸血。</li>
+      <li><b>兵可以拿起來重新擺。</b>打 Boss 前照下面第二張表調站位。</li>
+    </ul>
+    <details>
+      <summary>羈絆怎麼挑（10 種，數字照 2／4／6 種或 2／3／4 種）</summary>
+      <div class="tblwrap"><table class="mini">
+        <thead><tr><th>羈絆</th><th>效果</th><th>什麼時候拿</th></tr></thead>
+        <tbody>
+          <tr><td>帝國</td><td>開戰時帝國兵得到最大血量 10／16／22% 的護盾</td><td>最泛用：職業最多（16 種，和森林並列），最好湊</td></tr>
+          <tr><td>森林</td><td>森林兵第一次掉到半血以下，回 10／16／22% 血，每場一次</td><td>給前排</td></tr>
+          <tr><td>部族</td><td>部族兵攻速 +8／14／20%，第一隻部族兵倒下就沒了</td><td>前排夠硬才拿</td></tr>
+          <tr><td>亡命</td><td>打血量 40% 以下的敵人，傷害 +15／25／40%</td><td>只有敵人最後 4 成血吃得到，打死同一隻只快約 6／9／13%<span class="infer">推論</span></td></tr>
+          <tr><td>神聖</td><td>全隊受到的治療 +20／35%</td><td>隊上有會補血的兵才有用</td></tr>
+          <tr><td>工程</td><td>戰鬥道具等級 +1；3 種連手冊也 +1</td><td>道具多、等級快滿的時候</td></tr>
+          <tr><td>天界 <small>要解鎖</small></td><td>只剩 1 隻活著時，倒下的全部以 20／40% 血復活，每場一次</td><td>2 種就生效，適合撐 5 的倍數波</td></tr>
+          <tr><td>深淵 <small>要解鎖</small></td><td>深淵兵分攤彼此受的直接傷害 15／22／30%</td><td>主力是深淵兵、怕被集火時<span class="infer">推論</span></td></tr>
+          <tr><td>秘術 <small>要解鎖</small></td><td>秘術兵技能傷害 +12／20／30%</td><td>打骷髏龍這種吃普攻的 Boss<span class="infer">推論</span></td></tr>
+          <tr><td>亡靈 <small>要解鎖</small></td><td>任何一方有單位倒下，亡靈兵攻擊 +3／4／5%，最多 10 次</td><td>敵人數量多的波<span class="infer">推論</span></td></tr>
+        </tbody>
+      </table></div>
+      <ul><li>效果是遊戲寫的；「什麼時候拿」是我們從效果推的。</li><li>羈絆本身要先在局外買「聯盟紋章」；標「要解鎖」的 4 種還要另外買，都在<a href="meta.html#buy">局外頁</a>。</li></ul>
+    </details>
+    <details>
+      <summary>每隻 Boss 站位怎麼調（18 隻，點名字看招式）</summary>
+      <p class="note">第 10 波的 Boss 每個難度都會遇到，第 20 波從普通開始，第 30 波只有困難。站位重點都是從招式推的<span class="infer">推論</span>。</p>
+      <div class="tblwrap"><table class="mini comp-boss">
+        <thead><tr><th>地圖・波</th><th>Boss</th><th>站位重點</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="3">1 開闊森林</td></tr>
+          <tr><td>10</td><td><a href="boss.html#boss-Grimwolf_Orc">幽狼獸人</a></td><td>集火本體，狼不傷基地，不用為狼多帶前排</td></tr>
+          <tr><td>20</td><td><a href="boss.html#boss-Howl_Orc">嚎叫獸人</a></td><td>前排散開，一吼最多打飛 3 個；要能速殺</td></tr>
+          <tr><td>30</td><td><a href="boss.html#boss-Orc_Arch_Shaman">獸人大薩滿</a></td><td>要射程 160 以上的兵；血少的別擠在一起</td></tr>
+          <tr class="grp"><td colspan="3">2 深邃洞窟</td></tr>
+          <tr><td>10</td><td><a href="boss.html#boss-Beholder">百眼王</a></td><td>最後面放耐打的，光束專打最遠的人</td></tr>
+          <tr><td>20</td><td><a href="boss.html#boss-Venom_Maw">劇毒巨口</a></td><td>最強的兵別站最前面；全隊散開躲毒池</td></tr>
+          <tr><td>30</td><td><a href="boss.html#boss-Cave_Basilisk">洞窟蛇怪</a></td><td>最前面的最容易被石化，帶攻速快或群攻的來解</td></tr>
+          <tr class="grp"><td colspan="3">3 荒原</td></tr>
+          <tr><td>10</td><td><a href="boss.html#boss-Dunefang">荒野劍齒獸</a></td><td>前後排別排在同一條直線上，一刀砍穿一排</td></tr>
+          <tr><td>20</td><td><a href="boss.html#boss-Bloodtail">血尾</a></td><td>前面要有人擋 6 隻鬣狗；輸出要穩，它打一下回一下</td></tr>
+          <tr><td>30</td><td><a href="boss.html#boss-Wasteland_Piper">荒野吹笛者</a></td><td>兩隻主力；讓戰力最高的是耐打、輸出普通的兵</td></tr>
+          <tr class="grp"><td colspan="3">4 失落遺蹟</td></tr>
+          <tr><td>10</td><td><a href="boss.html#boss-Dragonkin_Shaman">龍血薩滿</a></td><td>別讓兵站在水窪上；要有遠程打得到它</td></tr>
+          <tr><td>20</td><td><a href="boss.html#boss-Spine_Tyrant">逆棘暴君</a></td><td>會反彈遠程攻擊，這隻改靠近戰輸出</td></tr>
+          <tr><td>30</td><td><a href="boss.html#boss-Razorscale_Elder">刃鱗長老</a></td><td>每個人都會被打，全隊血量要平均，別有特別脆的</td></tr>
+          <tr class="grp"><td colspan="3">5 猩紅地獄</td></tr>
+          <tr><td>10</td><td><a href="boss.html#boss-Dark_Lord">黑暗君主</a></td><td>全場重擊躲不掉，靠補血、護盾撐住半血以上</td></tr>
+          <tr><td>20</td><td><a href="boss.html#boss-Skeleton_Dragon">骷髏龍</a></td><td>輸出別壓在一隻身上；技能、刻印傷害高的隊伍輕鬆</td></tr>
+          <tr><td>30</td><td><a href="boss.html#boss-Doom_Dragon">毀滅龍</a></td><td>血最厚的放最前面頂，前排不要擠</td></tr>
+          <tr class="grp"><td colspan="3">6 冰冷宇宙</td></tr>
+          <tr><td>10</td><td><a href="boss.html#boss-Twin_Star_Lords">雙星君主</a></td><td>上下兩路都要有輸出，轉去打沒開盾的那個</td></tr>
+          <tr><td>20</td><td><a href="boss.html#boss-Star_Judge">群星審判官</a></td><td>上下兩路人數擺一樣，它才會變脆</td></tr>
+          <tr><td>30</td><td><a href="boss.html#boss-Cosmic_Sovereign">宇宙帝王</a></td><td>最前面放輸出最高又耐打的，其他人會被定住 3 秒</td></tr>
+        </tbody>
+      </table></div>
+    </details>
+  </section>
+  </div>
+
   <div class="tip-box" id="tips"></div>
 
   <div class="planner">
@@ -62,8 +128,8 @@
 
 <div class="pop" id="pop"></div>
 
-<script src="data/factions.js?v=1115i"></script>
-<script src="data/tree.js?v=1115i"></script>
-<script src="app.js?v=1115i"></script>
+<script src="data/factions.js?v=1115j"></script>
+<script src="data/tree.js?v=1115j"></script>
+<script src="app.js?v=1115j"></script>
 </body>
 </html>

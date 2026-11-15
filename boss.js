@@ -84,6 +84,13 @@ function showBoss(key) {
   const el = document.getElementById('boss-' + key.replace(/\W+/g, '_'));
   if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
 }
+/* 從別頁連進來（boss.html#boss-Grimwolf_Orc）就打開那隻 */
+(function () {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (!h.startsWith('boss-')) return;
+  const b = BOSSES.find(x => 'boss-' + x.key.replace(/\W+/g, '_') === h);
+  if (b) setTimeout(() => showBoss(b.key), 50);
+})();
 
 /* ---------- 4. 波次曲線 ---------- */
 let cS = 3, cD = 3, cW = 30;
