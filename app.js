@@ -183,7 +183,7 @@ function showPop(k, anchor, pin){
   pop.innerHTML = `<div class="hd">${sprHtml(j.sprite, 'big')}<div><b>${esc(j.name)}</b><div class="alt">${j.rank} 階</div></div><button class="x" aria-label="關閉">×</button></div>`+
     `<div class="lbl">升階路線</div><div class="path">${path}</div>${alt}${more}`+
     `<div class="lbl">羈絆和同羈絆的職業</div>${fx}`+ st +
-    (canAdd ? `<div class="act"><button class="btn" data-toggle="${esc(k)}">${team.includes(k) ? '從隊伍移除' : '加進隊伍'}</button></div>` : '')+
+    (canAdd ? `<div class="act"><button class="btn" data-toggle="${esc(k)}">${team.includes(k) ? '從隊伍移除' : '加進隊伍'}</button><span class="alt">隊伍現在 ${team.length} 隻</span></div>` : '<div class="alt">1 階還沒有羈絆，不用加進隊伍；升到 2 階再挑。</div>')+
     (j.src ? `<div class="src">出處：${esc(j.src.replace(/^decompiled\//, ''))}</div>` : '');
   pop.classList.add('on'); pinned = !!pin;
   if (window.matchMedia('(max-width:820px)').matches) return;
@@ -217,7 +217,7 @@ document.addEventListener('click', e => {
   const tg = t.closest('[data-toggle]'); if (tg) { toggle(tg.dataset.toggle); const b = document.querySelector(`.cls[data-k="${CSS.escape(tg.dataset.toggle)}"]`); if (b) showPop(tg.dataset.toggle, b, true); return; }
   const b = t.closest('.cls');
   if (b) {
-    if (canHover) { if (J[b.dataset.k].rank >= 2) toggle(b.dataset.k); }
+    if (canHover) { if (J[b.dataset.k].rank >= 2) toggle(b.dataset.k); else { hoverKey = b.dataset.k; applyHL(); showPop(b.dataset.k, b, true); } }
     else { hoverKey = b.dataset.k; applyHL(); showPop(b.dataset.k, b, true); }
     return;
   }
@@ -295,6 +295,7 @@ q.addEventListener('keydown', e => {
   if (e.key === 'Escape') qres.classList.remove('on');
 });
 document.addEventListener('click', e => { if (!e.target.closest('.search')) qres.classList.remove('on'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && pop.classList.contains('on')) { hidePop(); hoverKey = null; applyHL(); } });
 
 $('tips').innerHTML = '<b>先知道</b>　1 階職業由<b>稀有度</b>決定（同樣是戰士，稀有是鬥士、傳說是骷髏鬥士），之後每次升階 2 選 1。只有 2、3 階有羈絆，人數算「不同職業」。標鎖頭的羈絆要先在局外解鎖，羈絆系統本身也要先買「聯盟紋章」。';
 draw();
