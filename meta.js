@@ -73,9 +73,9 @@ function drawUp(){
   const list = D.upgrades.filter(n => (fCat === 'all' || n.cat === fCat) && (!fNow || (!n.needs.length && !n.blocked)));
   $('ulist').innerHTML = list.length ? list.map(n => {
     const tags = [];
-    if (phaseOf[n.key]) tags.push(`<span class="tg ph">第 ${['一','二','三'][phaseOf[n.key]-1]} 批</span>`);
+    if (phaseOf[n.key]) tags.push(`<span class="tg ph" title="上面「升級先買什麼」建議的第幾批">建議第${['一','二','三'][phaseOf[n.key]-1]}批</span>`);
     if (n.blocked) tags.push('<span class="tg bad">買不到</span>');
-    if (n.section) tags.push('<span class="tg gate">區域門檻</span>');
+    if (n.section) tags.push('<span class="tg gate" title="要先把同一區的幾個節點買齊才能買">區域門檻</span>');
     const eff = n.stat ? arrow(n.stat) : n.desc;
     const subs = [needText(n)];
     if (n.parent) subs.push('先買「' + esc(U[n.parent].name) + '」');

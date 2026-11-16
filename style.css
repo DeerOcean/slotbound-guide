@@ -315,3 +315,18 @@ h1{font-family:"Noto Serif TC",serif;font-size:28px;line-height:1.3;margin:8px 0
 .comp .mini td small{font-size:11px;color:var(--muted);margin-left:4px;white-space:nowrap}
 .comp-boss td:first-child,.comp-boss td:nth-child(2){white-space:nowrap}
 .comp .mini a{color:var(--teal)}
+
+/* 2026-11-16 試用回饋：開局頁詞彙、規劃器技能、每隻兵的技能 */
+.gloss{margin:0 0 20px;max-width:56em}
+.gloss h3{margin:0 0 6px;font-size:15px}
+.gloss ul{margin:0;padding-left:20px}
+.gloss li{margin:4px 0;font-size:14px}
+.gloss a{color:var(--teal);font-size:13px;margin-left:4px}
+.comp-h{margin:18px 0 4px;font-size:16px}
+.comp-h small{font-size:12px;color:var(--muted);font-weight:400;margin-left:6px}
+.pop .skl{margin:2px 0 6px;font-size:13px}
+.pop .skl .alt{display:inline}
+#skills{margin-top:28px}
+.skg{margin:8px 0}
+.skg .mini td small{display:block;font-size:11px;color:var(--muted)}
+.skg .mini td:first-child,.skg .mini td:nth-child(2){white-space:nowrap}

@@ -6,7 +6,7 @@
 <title>Slotbound 實用指南</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1116a">
+<link rel="stylesheet" href="style.css?v=1116c">
 </head>
 <body>
 <header class="top">
@@ -41,8 +41,7 @@
       <li><b>不要只養一隻主力。</b>荒野吹笛者每 12 秒把你戰力最高的兵拉去幫它 3 秒，骷髏龍專挑攻擊最高的兵吸血。</li>
       <li><b>兵可以拿起來重新擺。</b>打 Boss 前照下面第二張表調站位。</li>
     </ul>
-    <details>
-      <summary>羈絆怎麼挑（10 種，數字照 2／4／6 種或 2／3／4 種）</summary>
+    <h3 class="comp-h">羈絆效果和什麼時候拿 <small>10 種，數字照 2／4／6 種或 2／3／4 種</small></h3>
       <div class="tblwrap"><table class="mini">
         <thead><tr><th>羈絆</th><th>效果</th><th>什麼時候拿</th></tr></thead>
         <tbody>
@@ -59,7 +58,6 @@
         </tbody>
       </table></div>
       <ul><li>效果是遊戲寫的；「什麼時候拿」是我們從效果推的。</li><li>羈絆本身要先在局外買「聯盟紋章」；標「要解鎖」的 4 種還要另外買，都在<a href="meta.html#buy">局外頁</a>。</li></ul>
-    </details>
     <details>
       <summary>每隻 Boss 站位怎麼調（18 隻，點名字看招式）</summary>
       <p class="note">第 10 波的 Boss 每個難度都會遇到，第 20 波從普通開始，第 30 波只有困難。站位重點都是從招式推的<span class="infer">推論</span>。</p>
@@ -124,12 +122,20 @@
       </section>
     </aside>
   </div>
+
+  <section class="sec guide" id="skills" data-t="技能 每隻兵 技能 冷卻 被動">
+    <h2>每隻兵的技能</h2>
+    <p class="adv">技能是兵自己會放的招，跟刻印不同、不能換。挑主力時先看這裡：群攻、控場、補血的兵，比單打的更難被取代。</p>
+    <p class="note">名稱和說明是遊戲內繁中原文。大多每 4 秒放一次；標「被動」的不用放，條件到了自己觸發。上面規劃器點職業也看得到。</p>
+    <div id="skillList"></div>
+  </section>
 </main>
 
 <div class="pop" id="pop"></div>
 
-<script src="data/factions.js?v=1116a"></script>
-<script src="data/tree.js?v=1116a"></script>
-<script src="app.js?v=1116a"></script>
+<script src="data/factions.js?v=1116c"></script>
+<script src="data/tree.js?v=1116c"></script>
+<script src="data/skills.js?v=1116c"></script>
+<script src="app.js?v=1116c"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@ const F = (FX.factions || []).map(f => ({
 const fxById = Object.fromEntries(F.map(f => [f.id, f]));
 const fxName = id => (fxById[id] && fxById[id].name) || id;
 const J = TR.jobs;                 // key → 職業
+const SK = (window.SB_DATA && window.SB_DATA.skills) || {};   // 職業 id → 技能（tools/extract/extract_skills.py）
 const T = TR.tree;                 // 符號 → { base, grades:[{grade, gradeZh, r1, r1Zh, r1Sprite, opts:[{r2, r3:[]}]}] }
 const SYM = [['W','戰士'],['A','弓手'],['S','槍兵'],['M','法師'],['H','騎兵'],['D','決鬥者'],['Joker','小丑']];
 const symName = Object.fromEntries(SYM.map(([s]) => [s, (T[s] && T[s].base) || s]));
@@ -178,10 +179,12 @@ function showPop(k, anchor, pin){
     const ids = new Set(); const uniq = others.filter(x => !ids.has(J[x].id) && ids.add(J[x].id));
     return `<div class="fxg"><span class="tag" data-f="${f}">${esc(fxName(f))}</span><span class="mates">${uniq.slice(0, 14).map(x => esc(J[x].name)).join('、')}${uniq.length > 14 ? ` 等 ${uniq.length} 個` : ''}</span></div>`;
   }).join('') : '<div class="alt">沒有羈絆</div>';
+  const sk = (SK[j.id] || []).map(x => `<div class="skl"><b>${esc(x.n)}</b> <span class="alt">${x.p ? '被動' : (x.cd ? '每 ' + x.cd + ' 秒' : '')}</span><div>${esc(x.d)}</div></div>`).join('');
   const st = j.stats ? `<div class="stats">${[['hp','血'],['atk','攻'],['aspd','攻速'],['distance','射程']].map(([s,l]) => `<div><b>${j.stats[s] ?? '-'}</b>${l}</div>`).join('')}</div>` : '';
   const canAdd = j.rank >= 2;
   pop.innerHTML = `<div class="hd">${sprHtml(j.sprite, 'big')}<div><b>${esc(j.name)}</b><div class="alt">${j.rank} 階</div></div><button class="x" aria-label="關閉">×</button></div>`+
     `<div class="lbl">升階路線</div><div class="path">${path}</div>${alt}${more}`+
+    (sk ? `<div class="lbl">技能</div>${sk}` : '') +
     `<div class="lbl">羈絆和同羈絆的職業</div>${fx}`+ st +
     (canAdd ? `<div class="act"><button class="btn" data-toggle="${esc(k)}">${team.includes(k) ? '從隊伍移除' : '加進隊伍'}</button><span class="alt">隊伍現在 ${team.length} 隻</span></div>` : '<div class="alt">1 階還沒有羈絆，不用加進隊伍；升到 2 階再挑。</div>')+
     (j.src ? `<div class="src">出處：${esc(j.src.replace(/^decompiled\//, ''))}</div>` : '');
@@ -299,4 +302,14 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && pop.classL
 
 $('tips').innerHTML = '<b>先知道</b>　1 階職業由<b>稀有度</b>決定（同樣是戰士，稀有是鬥士、傳說是骷髏鬥士），之後每次升階 2 選 1。只有 2、3 階有羈絆，人數算「不同職業」。標鎖頭的羈絆要先在局外解鎖，羈絆系統本身也要先買「聯盟紋章」。';
 draw();
+
+/* ---------- 每隻兵的技能（照兵種分組，2 階在前） ---------- */
+(function(){
+  const box = $('skillList'); if (!box) return;
+  const rows = s => { const seen = new Set(); return Object.entries(J).filter(([k, j]) => j.sym === s && j.rank >= 2 && where[k] && SK[j.id] && !seen.has(j.id) && seen.add(j.id)).sort((a, b) => a[1].rank - b[1].rank); };
+  box.innerHTML = SYM.map(([s, label]) => { const r = rows(s); if (!r.length) return '';
+    return `<details class="skg"><summary>${esc(symName[s] || label)}系（${r.length} 個職業）</summary><div class="tblwrap"><table class="mini"><thead><tr><th>職業</th><th>技能</th><th>效果</th></tr></thead><tbody>` +
+      r.map(([k, j]) => SK[j.id].map(x => `<tr><td>${esc(j.name)}<small>${j.rank} 階</small></td><td><b>${esc(x.n)}</b><small>${x.p ? '被動' : (x.cd ? x.cd + ' 秒' : '')}</small></td><td>${esc(x.d)}</td></tr>`).join('')).join('') +
+      '</tbody></table></div></details>'; }).join('');
+})();
 })();
