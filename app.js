@@ -43,6 +43,7 @@ function routeNodes(w, k){
 /* ---------- 狀態 ---------- */
 let team = [];            // 職業 key
 let sym = 'W';
+let gview = null;         // 按稀有度看：某個稀有度、六個兵種一次列出
 let filterFx = null;
 let hoverKey = null;
 let gradeOn = new Set(['normal','advanced','rare','legendary','prism']);  // 羈絆表要看的稀有度
@@ -76,16 +77,29 @@ function card(k){
   return `<button class="cls ${inTeam?'in':''}" data-k="${esc(k)}">${sprHtml(j.sprite)}<span class="tx"><span class="r">${j.rank}階</span>${esc(j.name)}<span class="fx">${fxs || '無羈絆'}</span></span></button>`;
 }
 function drawSyms(){
-  $('syms').innerHTML = SYM.filter(([s]) => T[s]).map(([s]) => `<button class="stab ${s===sym && !filterFx?'on':''}" data-s="${s}">${esc(symName[s])}</button>`).join('');
+  const gZh = TR.meta.gradeZh || {};
+  $('syms').innerHTML = `<span class="flabel">按兵種：</span>` +
+    SYM.filter(([s]) => T[s]).map(([s]) => `<button class="stab ${s===sym && !gview && !filterFx?'on':''}" data-s="${s}">${esc(symName[s])}</button>`).join('') +
+    `<span class="brk"></span><span class="flabel">按稀有度：</span>` +
+    GRADES.map(g => `<button class="stab gtab g-${g} ${gview===g && !filterFx?'on':''}" data-gv="${g}">${esc(gZh[g] || g)}</button>`).join('');
+}
+const GRADES = ['normal','advanced','rare','legendary','prism'];
+function treeRow(g, label){
+  const r1 = `<div class="r1">${sprHtml(g.r1Sprite)}<span class="tx"><span class="r">1階</span>${esc(g.r1Zh)}</span></div>`;
+  const br = g.opts.map(o => `<div class="br">${card(o.r2)}<span class="arrow">→</span>${o.r3.map(card).join('') || '<span class="empty">—</span>'}</div>`).join('');
+  return `<div class="row g-${g.grade}"><div class="gl"><span class="gd">${esc(label)}</span></div>${r1}<div class="brs">${br}</div></div>`;
 }
 function drawTree(){
   if (filterFx) return drawFxList();
+  if (gview) {
+    // 同一個稀有度，六個兵種一次看：骰到這個稀有度時，每個兵種會長成什麼
+    const rows = SYM.map(([s]) => [s, T[s] && T[s].grades.find(g => g.grade === gview)]).filter(([, g]) => g);
+    $('tree').innerHTML = `<div class="grid">` + rows.map(([s, g]) => treeRow(g, symName[s])).join('') + `</div>`;
+    applyHL();
+    return;
+  }
   const t = T[sym]; if (!t) { $('tree').innerHTML = '<p class="empty">資料還沒載入。</p>'; return; }
-  $('tree').innerHTML = `<div class="grid">` + t.grades.map(g => {
-    const r1 = `<div class="r1">${sprHtml(g.r1Sprite)}<span class="tx"><span class="r">1階</span>${esc(g.r1Zh)}</span></div>`;
-    const br = g.opts.map(o => `<div class="br">${card(o.r2)}<span class="arrow">→</span>${o.r3.map(card).join('') || '<span class="empty">—</span>'}</div>`).join('');
-    return `<div class="row g-${g.grade}"><div class="gl"><span class="gd">${esc(g.gradeZh)}</span></div>${r1}<div class="brs">${br}</div></div>`;
-  }).join('') + `</div>`;
+  $('tree').innerHTML = `<div class="grid">` + t.grades.map(g => treeRow(g, g.gradeZh)).join('') + `</div>`;
   applyHL();
 }
 function drawFxList(){
@@ -227,7 +241,8 @@ document.addEventListener('click', e => {
   if (t.closest('[data-back]')) { filterFx = null; draw(); return; }
   const gc = t.closest('[data-grade]'); if (gc) { const g = gc.dataset.grade; if (gradeOn.has(g) && gradeOn.size > 1) gradeOn.delete(g); else gradeOn.add(g); drawTree(); return; }
   const ce = t.closest('[data-cell]'); if (ce) { openCell = openCell === ce.dataset.cell ? null : ce.dataset.cell; drawTree(); return; }
-  const st = t.closest('[data-s]'); if (st) { sym = st.dataset.s; filterFx = null; draw(); return; }
+  const gv = t.closest('[data-gv]'); if (gv) { gview = gv.dataset.gv; filterFx = null; draw(); return; }
+  const st = t.closest('[data-s]'); if (st) { sym = st.dataset.s; gview = null; filterFx = null; draw(); return; }
   const fc = t.closest('[data-f]');
   if (fc) { filterFx = filterFx === fc.dataset.f ? null : fc.dataset.f; openCell = null; hidePop(); draw(); $('tree').scrollIntoView({behavior:'smooth', block:'start'}); return; }
   if (!t.closest('#pop') && pinned) { hidePop(); hoverKey = null; applyHL(); }

@@ -45,6 +45,11 @@ h1{font-family:"Noto Serif TC",serif;font-size:28px;line-height:1.3;margin:8px 0
 .filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .filters #filters{display:contents}
 .flabel{font-size:13px;color:var(--muted)}
+.syms .flabel{align-self:center}
+.syms .brk{flex-basis:100%;height:0}
+.gtab.g-legendary.on{border-color:var(--gold)}
+.gtab.g-prism{color:var(--wine)}
+.gtab.g-prism.on{background:color-mix(in srgb, var(--wine) 12%, var(--bg));border-color:var(--wine)}
 .fchip.locked::after{content:"🔒";font-size:10px;margin-left:3px}
 /* 升階樹：一列一個稀有度 */
 .grid{display:flex;flex-direction:column;gap:8px}
